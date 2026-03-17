@@ -8,7 +8,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#F7F7F5;--card:#FFFFFF;--text:#1C1C1C;--muted:#888;--border:#E2E2DE;
+  --bg:#F7F7F5;--card:#FFF;--text:#1C1C1C;--muted:#888;--border:#E2E2DE;
   --green:#2D9B6F;--green-l:#EAF7F1;
   --red:#C0392B;--red-l:#FDEDEC;
   --blue:#2471A3;--blue-l:#EBF5FB;
@@ -20,6 +20,22 @@ html,body{min-height:100vh;background:var(--bg);font-family:'Nunito',sans-serif;
 .screen{display:none}.screen.active{display:block}
 h2{font-size:18px;font-weight:800}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+
+/* LOGIN */
+.login-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;gap:16px;text-align:center}
+.login-logo{font-size:52px;margin-bottom:4px}
+.login-title{font-size:26px;font-weight:800}
+.login-sub{font-size:14px;color:var(--muted);max-width:280px;line-height:1.6}
+.google-btn{display:flex;align-items:center;gap:10px;padding:13px 22px;background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:border-color .12s;margin-top:8px}
+.google-btn:hover{border-color:#AAA}
+.google-btn svg{width:20px;height:20px;flex-shrink:0}
+.sync-bar{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-bottom:14px;padding:6px 10px;background:var(--card);border:1px solid var(--border);border-radius:8px}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0}
+.sync-dot.syncing{background:var(--amber);animation:pulse 1s infinite}
+.sync-dot.offline{background:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* SETUP */
 .setup-title{font-size:26px;font-weight:800;margin:32px 0 6px;text-align:center}
 .setup-sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:24px}
 .field-label{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:6px;display:block}
@@ -32,6 +48,8 @@ h2{font-size:18px;font-weight:800}
 .subj-opt .so-icon{font-size:28px;display:block;margin-bottom:4px}
 .subj-opt .so-name{font-size:14px;font-weight:800;display:block}
 .subj-opt .so-desc{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* BUTTONS */
 .btn{width:100%;padding:13px;border:none;border-radius:var(--radius);font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:opacity .12s}
 .btn:hover{opacity:.88}
 .btn.primary{background:var(--text);color:#FFF}
@@ -39,7 +57,9 @@ h2{font-size:18px;font-weight:800}
 .btn.success{background:var(--green);color:#FFF}
 .btn.danger{background:var(--red);color:#FFF}
 .btn+.btn{margin-top:8px}
-.home-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+
+/* HOME */
+.home-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px}
 .home-name{font-size:20px;font-weight:800}
 .home-date{font-size:12px;color:var(--muted);margin-top:2px}
 .streak-pill{background:var(--amber-l);border:1px solid #E8C97A;border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--amber)}
@@ -67,6 +87,8 @@ h2{font-size:18px;font-weight:800}
 .sb-arrow{font-size:18px;color:var(--muted)}
 .lvl-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:6px;width:130px}
 .lvl-fill{height:100%;border-radius:2px;background:var(--blue)}
+
+/* GAME */
 .game-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--card);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .game-meta{flex:1}
@@ -90,6 +112,8 @@ h2{font-size:18px;font-weight:800}
 .feedback-row{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:8px;margin-top:10px;font-size:14px;font-weight:700}
 .feedback-row.ok{background:var(--green-l);color:var(--green)}
 .feedback-row.fail{background:var(--red-l);color:var(--red)}
+
+/* RESULTS */
 .results-header{text-align:center;padding:10px 0 20px}
 .results-header .big-icon{font-size:44px;margin-bottom:8px}
 .result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
@@ -104,42 +128,78 @@ h2{font-size:18px;font-weight:800}
 .verdict.repeat{background:var(--amber-l);border-color:#E8C97A}
 .verdict .v-title{font-size:14px;font-weight:800}
 .verdict .v-sub{font-size:12px;color:var(--muted);margin-top:3px}
+
+/* HISTORY */
 .history-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
 .history-row:last-child{border-bottom:none}
 .hr-date{color:var(--muted);font-size:12px;margin-top:2px}
 .hr-stats{display:flex;gap:12px;font-weight:700}
 .hr-acc-good{color:var(--green)}.hr-acc-bad{color:var(--red)}.hr-time{color:var(--blue)}
+
+/* LOADING */
+.loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;gap:12px;color:var(--muted);font-size:14px}
+.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 <div id="root">
 
-<div id="screen-setup" class="screen active">
+<!-- LOGIN -->
+<div id="screen-login" class="screen active">
+  <div class="login-wrap">
+    <div class="login-logo">📚</div>
+    <div class="login-title">Aprendo y Crezco</div>
+    <div class="login-sub">Inicia sesión para guardar tu progreso en la nube y continuar desde cualquier dispositivo.</div>
+    <button class="google-btn" id="btn-google">
+      <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Continuar con Google
+    </button>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div id="screen-loading" class="screen">
+  <div class="loading-wrap">
+    <div class="spinner"></div>
+    <div id="loading-msg">Cargando progreso...</div>
+  </div>
+</div>
+
+<!-- SETUP (first time) -->
+<div id="screen-setup" class="screen">
   <div class="setup-title">Aprendo y Crezco</div>
-  <p class="setup-sub">Configura tu perfil de aprendizaje</p>
+  <p class="setup-sub">Primera vez — configura el perfil</p>
   <div class="card">
-    <label class="field-label">Nombre</label>
-    <input class="text-input" id="setup-name" type="text" placeholder="Nombre de la estudiante" maxlength="24"/>
+    <label class="field-label">Nombre de la estudiante</label>
+    <input class="text-input" id="setup-name" type="text" placeholder="Nombre" maxlength="24" readonly style="background:#F5F5F5;color:var(--muted);cursor:not-allowed"/>
+    <div style="font-size:11px;color:var(--muted);margin-top:4px">Nombre tomado de tu cuenta Google</div>
     <div style="margin-top:20px">
-      <label class="field-label">Materia</label>
+      <label class="field-label">Materia principal</label>
       <div class="subj-pick">
-        <div class="subj-opt selected" data-subj="math" onclick="pickSubj(this)">
+        <div class="subj-opt selected" data-subj="math">
           <span class="so-icon">🔢</span>
           <span class="so-name">Matemáticas</span>
           <span class="so-desc">Cálculo y números</span>
         </div>
-        <div class="subj-opt" data-subj="read" onclick="pickSubj(this)">
+        <div class="subj-opt" data-subj="read">
           <span class="so-icon">📖</span>
           <span class="so-name">Lectura</span>
           <span class="so-desc">Comprensión y vocabulario</span>
         </div>
       </div>
     </div>
-    <button class="btn primary" onclick="saveSetup()">Comenzar</button>
+    <button class="btn primary" id="btn-save-setup">Guardar y empezar</button>
   </div>
 </div>
 
+<!-- HOME -->
 <div id="screen-home" class="screen">
+  <div class="sync-bar" id="sync-bar">
+    <div class="sync-dot" id="sync-dot"></div>
+    <span id="sync-msg">Sincronizado</span>
+    <span style="margin-left:auto;cursor:pointer;font-size:11px;color:var(--blue)" id="btn-signout">Cerrar sesión</span>
+  </div>
   <div class="home-header">
     <div>
       <div class="home-name" id="h-name">Hola</div>
@@ -159,13 +219,14 @@ h2{font-size:18px;font-weight:800}
     <div class="sb-sub" id="h-banner-sub">Completa tu práctica de hoy</div>
   </div>
   <div id="subj-area"></div>
-  <button class="btn secondary" style="margin-top:6px;font-size:13px" onclick="showHistory()">Ver historial</button>
-  <button class="btn secondary" style="margin-top:6px;font-size:12px;color:var(--muted)" onclick="changeSubject()">Cambiar materia</button>
+  <button class="btn secondary" style="margin-top:6px;font-size:13px" id="btn-history">Ver historial</button>
+  <button class="btn secondary" style="margin-top:6px;font-size:12px;color:var(--muted)" id="btn-change-subj">Cambiar materia</button>
 </div>
 
+<!-- GAME -->
 <div id="screen-game" class="screen">
   <div class="game-header">
-    <button class="icon-btn" onclick="confirmExit()">←</button>
+    <button class="icon-btn" id="btn-exit">←</button>
     <div class="game-meta">
       <div class="game-subj" id="g-subj"></div>
       <div class="game-lvl" id="g-lvl"></div>
@@ -179,9 +240,10 @@ h2{font-size:18px;font-weight:800}
     <div class="opts" id="q-opts"></div>
     <div id="q-fb" style="display:none"></div>
   </div>
-  <button class="btn primary" id="next-btn" onclick="nextQ()" style="display:none">Siguiente</button>
+  <button class="btn primary" id="next-btn" style="display:none">Siguiente</button>
 </div>
 
+<!-- RESULTS -->
 <div id="screen-results" class="screen">
   <div class="results-header">
     <div class="big-icon" id="r-icon"></div>
@@ -198,156 +260,304 @@ h2{font-size:18px;font-weight:800}
     <div class="v-title" id="rv-title"></div>
     <div class="v-sub" id="rv-sub"></div>
   </div>
-  <button class="btn" id="r-act-btn" onclick="doResultAction()"></button>
-  <button class="btn secondary" style="margin-top:8px" onclick="goHome()">Volver al inicio</button>
+  <button class="btn" id="r-act-btn" id="btn-result-action"></button>
+  <button class="btn secondary" style="margin-top:8px" id="btn-go-home-results">Volver al inicio</button>
 </div>
 
+<!-- HISTORY -->
 <div id="screen-history" class="screen">
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
-    <button class="icon-btn" onclick="goHome()">←</button>
+    <button class="icon-btn" id="btn-go-home-history">←</button>
     <h2>Historial</h2>
   </div>
   <div class="card" id="hist-list"></div>
 </div>
 
 </div>
-<script>
-const SAVE_KEY='aycv3';
-const PASS_ACC=0.80;
-const ERR_REPEAT=0.20;
 
-function blankData(){
-  return{name:'',subject:'math',streak:0,lastDoneDate:null,
-    todayDone:false,lastOpenDate:null,history:[],
-    levels:{math:0,read:0},attempts:{math:0,read:0}};
-}
-let D=function(){try{return JSON.parse(localStorage.getItem(SAVE_KEY))||blankData();}catch(e){return blankData();}}();
-function save(){localStorage.setItem(SAVE_KEY,JSON.stringify(D));}
+<script type="module">
+import { initializeApp }          from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut as fbSignOut }
+                                   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, serverTimestamp }
+                                   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-function todayStr(){return new Date().toISOString().slice(0,10);}
-function fmtDate(ds){
-  const dn=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],mn=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-  const d=new Date(ds+'T12:00:00');return`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`;
+// ── FIREBASE INIT ─────────────────────────────────────────────
+const firebaseConfig = {
+  apiKey: "AIzaSyC7Y16Bs_lcuKCwA64-_g_yC20XP1S1804",
+  authDomain: "aprenderycrecer-58788.firebaseapp.com",
+  projectId: "aprenderycrecer-58788",
+  storageBucket: "aprenderycrecer-58788.firebasestorage.app",
+  messagingSenderId: "424388306703",
+  appId: "1:424388306703:web:4e28145e3426241364c07a"
+};
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+// ── STATE ─────────────────────────────────────────────────────
+const PASS_ACC  = 0.80;
+const ERR_REPEAT = 0.20;
+let currentUser = null;
+let D = null; // student profile loaded from Firestore
+
+function blankProfile(name, subject) {
+  return {
+    name,
+    subject,
+    streak: 0,
+    lastDoneDate: null,
+    todayDone: false,
+    lastOpenDate: null,
+    levels: { math: 0, read: 0 },
+    attempts: { math: 0, read: 0 },
+    // saved mid-session state
+    currentSession: null,
+    // failed questions per level key "math-3"
+    failedQuestions: {},
+    history: []   // last 60 entries kept
+  };
 }
-function fmtMs(ms){const s=Math.round(ms/1000);return s<60?`${s}s`:`${Math.floor(s/60)}m ${s%60}s`;}
-function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
-function sh(a){return[...a].sort(()=>Math.random()-.5);}
-function wrongSet(correct,count,min,max){
-  const s=new Set();
-  let attempts=0;
-  while(s.size<count&&attempts<200){
-    const w=rnd(min,max);
-    if(w!==correct)s.add(w);
-    attempts++;
+
+// ── FIRESTORE HELPERS ─────────────────────────────────────────
+function userDoc() {
+  return doc(db, 'students', currentUser.uid);
+}
+
+async function loadProfile() {
+  setSyncStatus('syncing', 'Cargando...');
+  try {
+    const snap = await getDoc(userDoc());
+    if (snap.exists()) {
+      D = snap.data();
+      // migrate old saves that lack new fields
+      D.currentSession   = D.currentSession   || null;
+      D.failedQuestions  = D.failedQuestions  || {};
+      D.history          = D.history          || [];
+    } else {
+      D = null; // first time — go to setup
+    }
+    setSyncStatus('ok', 'Sincronizado');
+    return D;
+  } catch(e) {
+    setSyncStatus('offline', 'Sin conexión');
+    return null;
   }
-  // fallback if range too narrow
-  let extra=min;
-  while(s.size<count){if(extra!==correct)s.add(extra);extra++;}
-  return[...s];
 }
 
-function checkNewDay(){
-  const today=todayStr();
-  if(D.lastOpenDate!==today){
-    if(D.lastOpenDate){
-      const diff=Math.round((new Date(today+'T12:00:00')-new Date(D.lastOpenDate+'T12:00:00'))/86400000);
-      if(diff===1&&D.todayDone)D.streak=(D.streak||0)+1;
-      else if(diff>1)D.streak=0;
-    }else D.streak=0;
-    D.todayDone=false;D.lastOpenDate=today;save();
+async function saveProfile() {
+  if (!currentUser || !D) return;
+  setSyncStatus('syncing', 'Guardando...');
+  try {
+    await setDoc(userDoc(), D);
+    setSyncStatus('ok', 'Guardado');
+  } catch(e) {
+    setSyncStatus('offline', 'Error al guardar');
   }
 }
 
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active');}
-function goHome(){updateHome();show('home');}
-
-let _subj='math';
-function pickSubj(el){document.querySelectorAll('.subj-opt').forEach(e=>e.classList.remove('selected'));el.classList.add('selected');_subj=el.dataset.subj;}
-function saveSetup(){
-  const n=document.getElementById('setup-name').value.trim();
-  if(!n){alert('Escribe el nombre');return;}
-  D.name=n;D.subject=_subj;save();checkNewDay();goHome();
+// Saves only specific fields — faster for frequent updates
+async function patchProfile(fields) {
+  if (!currentUser || !D) return;
+  Object.assign(D, fields);
+  setSyncStatus('syncing', 'Guardando...');
+  try {
+    await updateDoc(userDoc(), fields);
+    setSyncStatus('ok', 'Guardado');
+  } catch(e) {
+    // fallback: full save
+    await saveProfile();
+  }
 }
-document.getElementById('setup-name').addEventListener('keydown',e=>{if(e.key==='Enter')saveSetup();});
-function changeSubject(){
-  document.getElementById('setup-name').value=D.name;
-  const other=D.subject==='math'?'read':'math';
-  _subj=other;
-  document.querySelectorAll('.subj-opt').forEach(e=>e.classList.toggle('selected',e.dataset.subj===other));
+
+function setSyncStatus(status, msg) {
+  const dot = document.getElementById('sync-dot');
+  const txt = document.getElementById('sync-msg');
+  if (!dot) return;
+  dot.className = 'sync-dot' + (status === 'syncing' ? ' syncing' : status === 'offline' ? ' offline' : '');
+  txt.textContent = msg;
+}
+
+// ── AUTH ──────────────────────────────────────────────────────
+window.signInGoogle = async function() {
+  try {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider);
+  } catch(e) {
+    alert('Error al iniciar sesión: ' + e.message);
+  }
+};
+
+window.signOut = async function() {
+  if (!confirm('¿Cerrar sesión?')) return;
+  await fbSignOut(auth);
+};
+
+onAuthStateChanged(auth, async (user) => {
+  currentUser = user;
+  if (!user) {
+    show('login');
+    return;
+  }
+  show('loading');
+  document.getElementById('loading-msg').textContent = 'Cargando progreso...';
+  const profile = await loadProfile();
+  if (!profile) {
+    // Fill name from Google account — field is read-only, cannot be changed
+    document.getElementById('setup-name').value = user.displayName?.split(' ')[0] || user.email?.split('@')[0] || '';
+    show('setup');
+  } else {
+    checkNewDay();
+    goHome();
+  }
+});
+
+// ── SCREENS ──────────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+}
+window.goHome = function() { updateHome(); show('home'); };
+
+// ── SETUP ─────────────────────────────────────────────────────
+let _subj = 'math';
+window.pickSubj = function(el) {
+  document.querySelectorAll('.subj-opt').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  _subj = el.dataset.subj;
+};
+window.saveSetup = async function() {
+  // Always use the authenticated Google display name — cannot be spoofed
+  const n = (currentUser && currentUser.displayName)
+    ? currentUser.displayName.split(' ')[0]
+    : document.getElementById('setup-name').value.trim();
+  if (!n) { alert('No se pudo obtener el nombre. Intenta de nuevo.'); return; }
+  D = blankProfile(n, _subj);
+  D.lastOpenDate = todayStr();
+  await saveProfile();
+  checkNewDay();
+  goHome();
+};
+document.getElementById('setup-name').addEventListener('keydown', e => { if (e.key === 'Enter') window.saveSetup(); });
+
+window.changeSubject = function() {
+  // Show setup screen with name locked and opposite subject pre-selected
+  document.getElementById('setup-name').value = D.name;
+  const other = D.subject === 'math' ? 'read' : 'math';
+  _subj = other;
+  document.querySelectorAll('.subj-opt').forEach(e => e.classList.toggle('selected', e.dataset.subj === other));
+  // Update button label
+  document.getElementById('btn-save-setup').textContent = 'Cambiar materia';
   show('setup');
-}
+};
 
 // ── LEVEL NAMES ───────────────────────────────────────────────
-const LN={
-  math:[
-    'Números hasta 100',
-    'Decenas y unidades',
-    'Comparar números',
-    'Sumas sin llevar',
-    'Sumas con llevada',
-    'Restas sin llevar',
-    'Restas con préstamo',
-    'Tablas del 2 y del 5',
-    'Tabla del 10',
-    'División básica',
-    'Longitud y peso',
-    'Tiempo y dinero',
-    'Problemas con sumas',
-    'Problemas con restas',
-    'Figuras geométricas',
-    'Secuencias y patrones'
+const LN = {
+  math: [
+    'Números hasta 100','Decenas y unidades','Comparar números',
+    'Sumas sin llevar','Sumas con llevada',
+    'Restas sin llevar','Restas con préstamo',
+    'Tablas del 2 y del 5','Tabla del 10','División básica',
+    'Longitud y peso','Tiempo y dinero',
+    'Problemas con sumas','Problemas con restas',
+    'Figuras geométricas','Secuencias y patrones'
   ],
-  read:['Vocales','Sílabas','Palabras','Completar frases','Comprensión','Sinónimos','Antónimos','Identificar sílabas','Lectura y preguntas','Vocabulario']
+  read: [
+    'Vocales','Sílabas','Palabras','Completar frases','Comprensión',
+    'Sinónimos','Antónimos','Identificar sílabas','Lectura y preguntas','Vocabulario'
+  ]
 };
-const SL={math:'Matemáticas',read:'Lectura'};
+const SL = { math: 'Matemáticas', read: 'Lectura' };
 
-// ── HOME ─────────────────────────────────────────────────────
-function updateHome(){
+// ── DATE UTILS ────────────────────────────────────────────────
+function todayStr() { return new Date().toISOString().slice(0, 10); }
+function fmtDate(ds) {
+  const dn = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+        mn = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const d = new Date(ds + 'T12:00:00');
+  return `${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`;
+}
+function fmtMs(ms) {
+  const s = Math.round(ms / 1000);
+  return s < 60 ? `${s}s` : `${Math.floor(s/60)}m ${s%60}s`;
+}
+
+function checkNewDay() {
+  const today = todayStr();
+  if (D.lastOpenDate !== today) {
+    if (D.lastOpenDate) {
+      const diff = Math.round((new Date(today+'T12:00:00') - new Date(D.lastOpenDate+'T12:00:00')) / 86400000);
+      if (diff === 1 && D.todayDone) D.streak = (D.streak || 0) + 1;
+      else if (diff > 1) D.streak = 0;
+    } else D.streak = 0;
+    D.todayDone = false;
+    D.lastOpenDate = today;
+    // Don't discard currentSession — allow resuming across days
+  }
+}
+
+// ── HOME ──────────────────────────────────────────────────────
+function updateHome() {
   checkNewDay();
-  const today=todayStr(),hist=D.history||[];
-  document.getElementById('h-name').textContent=D.name;
-  document.getElementById('h-date').textContent=fmtDate(today);
-  document.getElementById('h-streak').textContent=`${D.streak} día${D.streak!==1?'s':''} seguidos`;
-  document.getElementById('h-sessions').textContent=hist.length;
-  if(hist.length){
-    const avgA=Math.round(hist.reduce((a,h)=>a+h.correct/h.total,0)/hist.length*100);
-    const avgS=(hist.reduce((a,h)=>a+h.timeMs/h.total,0)/hist.length/1000).toFixed(1);
-    document.getElementById('h-acc').textContent=avgA+'%';
-    document.getElementById('h-spd').textContent=avgS+'s';
-  }else{document.getElementById('h-acc').textContent='—';document.getElementById('h-spd').textContent='—';}
+  const today = todayStr(), hist = D.history || [];
+  document.getElementById('h-name').textContent = D.name;
+  document.getElementById('h-date').textContent = fmtDate(today);
+  document.getElementById('h-streak').textContent = `${D.streak} día${D.streak!==1?'s':''} seguidos`;
+  document.getElementById('h-sessions').textContent = hist.length;
+  if (hist.length) {
+    const avgA = Math.round(hist.reduce((a,h) => a + h.correct/h.total, 0) / hist.length * 100);
+    const avgS = (hist.reduce((a,h) => a + h.timeMs/h.total, 0) / hist.length / 1000).toFixed(1);
+    document.getElementById('h-acc').textContent = avgA + '%';
+    document.getElementById('h-spd').textContent = avgS + 's';
+  } else {
+    document.getElementById('h-acc').textContent = '—';
+    document.getElementById('h-spd').textContent = '—';
+  }
 
-  const bar=document.getElementById('day-bar'),lbl=document.getElementById('day-labels');
-  bar.innerHTML='';lbl.innerHTML='';
-  const sd=['D','L','M','X','J','V','S'];
-  for(let i=6;i>=0;i--){
-    const d=new Date();d.setDate(d.getDate()-i);const ds=d.toISOString().slice(0,10);
-    const isToday=(ds===today),done=isToday?D.todayDone:hist.some(h=>h.date===ds&&h.passed);
-    const dot=document.createElement('div');
-    dot.className='day-dot'+(isToday?(D.todayDone?' today-done':' today-pending'):(done?' done':''));
+  // 7-day bar
+  const bar = document.getElementById('day-bar'), lbl = document.getElementById('day-labels');
+  bar.innerHTML = ''; lbl.innerHTML = '';
+  const sd = ['D','L','M','X','J','V','S'];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const ds = d.toISOString().slice(0,10);
+    const isToday = ds === today;
+    const done = isToday ? D.todayDone : hist.some(h => h.date === ds && h.passed);
+    const dot = document.createElement('div');
+    dot.className = 'day-dot' + (isToday ? (D.todayDone ? ' today-done' : ' today-pending') : (done ? ' done' : ''));
     bar.appendChild(dot);
-    const sp=document.createElement('span');sp.textContent=sd[d.getDay()];lbl.appendChild(sp);
+    const sp = document.createElement('span'); sp.textContent = sd[d.getDay()]; lbl.appendChild(sp);
   }
 
-  const bn=document.getElementById('h-banner');
-  if(D.todayDone){
-    bn.className='session-banner done';
-    document.getElementById('h-banner-title').textContent='Sesión de hoy completada';
-    document.getElementById('h-banner-sub').textContent=`Racha: ${D.streak} día${D.streak!==1?'s':''}`;
-  }else{
-    bn.className='session-banner pending';
-    document.getElementById('h-banner-title').textContent='Sesión pendiente';
-    document.getElementById('h-banner-sub').textContent='Completa tu práctica de hoy para mantener la racha';
+  // Banner — show resume option if there's a saved mid-session
+  const bn = document.getElementById('h-banner');
+  if (D.currentSession) {
+    bn.className = 'session-banner pending';
+    const cs = D.currentSession;
+    document.getElementById('h-banner-title').textContent = 'Sesión en curso — retomar';
+    document.getElementById('h-banner-sub').textContent =
+      `${SL[cs.subj]} · Nivel ${cs.lvl+1} · Pregunta ${cs.qi+1}/${cs.questions.length}`;
+  } else if (D.todayDone) {
+    bn.className = 'session-banner done';
+    document.getElementById('h-banner-title').textContent = 'Sesión de hoy completada';
+    document.getElementById('h-banner-sub').textContent = `Racha: ${D.streak} día${D.streak!==1?'s':''}`;
+  } else {
+    bn.className = 'session-banner pending';
+    document.getElementById('h-banner-title').textContent = 'Sesión pendiente';
+    document.getElementById('h-banner-sub').textContent = 'Completa tu práctica de hoy';
   }
 
-  const s=D.subject,lvl=D.levels[s]||0,names=LN[s],att=D.attempts[s]||0;
-  const pct=Math.round(lvl/names.length*100);
-  document.getElementById('subj-area').innerHTML=`
-    <button class="subj-btn" onclick="startSession('${s}')">
+  // Subject button
+  const s = D.subject, lvl = D.levels[s]||0, names = LN[s], att = D.attempts[s]||0;
+  const pct = Math.round(lvl / names.length * 100);
+  const resumeLabel = D.currentSession && D.currentSession.subj === s ? ' · Reanudar' : '';
+  document.getElementById('subj-area').innerHTML = `
+    <button class="subj-btn" id="btn-start-subj">
       <div class="sb-left">
         <div style="font-size:26px">${s==='math'?'🔢':'📖'}</div>
         <div>
           <span class="sb-name">${SL[s]}</span>
-          <span class="sb-level">Nivel ${lvl+1} — ${names[Math.min(lvl,names.length-1)]}${att>0?' · Intento '+att:''}</span>
+          <span class="sb-level">Nivel ${lvl+1} — ${names[Math.min(lvl,names.length-1)]}${att>0?' · Intento '+att:''}${resumeLabel}</span>
           <div class="lvl-bar"><div class="lvl-fill" style="width:${pct}%"></div></div>
         </div>
       </div>
@@ -355,478 +565,327 @@ function updateHome(){
     </button>`;
 }
 
-function showHistory(){
-  const hist=[...(D.history||[])].reverse();
-  const el=document.getElementById('hist-list');
-  el.innerHTML=hist.length?hist.map(h=>{
-    const acc=Math.round(h.correct/h.total*100),cls=acc>=80?'hr-acc-good':'hr-acc-bad';
-    return`<div class="history-row">
+window.showHistory = function() {
+  const hist = [...(D.history||[])].reverse();
+  const el = document.getElementById('hist-list');
+  el.innerHTML = hist.length ? hist.map(h => {
+    const acc = Math.round(h.correct/h.total*100), cls = acc>=80?'hr-acc-good':'hr-acc-bad';
+    return `<div class="history-row">
       <div><div style="font-weight:700">${SL[h.subject]} — Nv.${h.level+1}${h.passed?' ✓':' ✗'}</div><div class="hr-date">${fmtDate(h.date)}</div></div>
       <div class="hr-stats"><span class="${cls}">${acc}%</span><span class="hr-time">${fmtMs(h.timeMs)}</span></div>
     </div>`;
-  }).join(''):'<p style="text-align:center;padding:20px;color:var(--muted)">Sin sesiones aún</p>';
+  }).join('') : '<p style="text-align:center;padding:20px;color:var(--muted)">Sin sesiones aún</p>';
   show('history');
-}
+};
 
 // ── QUESTION GENERATORS ───────────────────────────────────────
-function genLevel(subj,lvl){
-  const g={
-    math:[
-      qNumbers,      // 0 — Números hasta 100
-      qPlaceValue,   // 1 — Decenas y unidades
-      qCompare,      // 2 — Comparar números
-      qAddSimple,    // 3 — Sumas sin llevar
-      qAddCarry,     // 4 — Sumas con llevada
-      qSubSimple,    // 5 — Restas sin llevar
-      qSubBorrow,    // 6 — Restas con préstamo
-      qMult25,       // 7 — Tablas del 2 y del 5
-      qMult10,       // 8 — Tabla del 10
-      qDiv,          // 9 — División básica
-      qMeasure,      // 10 — Longitud y peso
-      qTimeMoney,    // 11 — Tiempo y dinero
-      qProblemAdd,   // 12 — Problemas con sumas
-      qProblemSub,   // 13 — Problemas con restas
-      qGeometry,     // 14 — Figuras geométricas
-      qPatterns      // 15 — Secuencias y patrones
-    ],
+function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function sh(a){return[...a].sort(()=>Math.random()-.5);}
+function wrongSet(correct,count,min,max){
+  const s=new Set();let att=0;
+  while(s.size<count&&att<300){const w=rnd(min,max);if(w!==correct)s.add(w);att++;}
+  let ex=min;while(s.size<count){if(ex!==correct)s.add(ex);ex++;}
+  return[...s];
+}
+
+function genLevel(subj, lvl) {
+  const g = {
+    math:[qNumbers,qPlaceValue,qCompare,qAddSimple,qAddCarry,qSubSimple,qSubBorrow,
+          qMult25,qMult10,qDiv,qMeasure,qTimeMoney,qProblemAdd,qProblemSub,qGeometry,qPatterns],
     read:[qVowels,qSyllables,qWords,qComplete,qComp,qSynonyms,qAntonyms,qSylId,qReadQ,qVocab]
   };
-  return g[subj][Math.min(lvl,g[subj].length-1)]();
+  return g[subj][Math.min(lvl, g[subj].length-1)]();
 }
 
-// ── MATH GENERATORS ──────────────────────────────────────────
-
-// 0 · Leer y escribir números hasta 100
-function qNumbers(){
-  return Array.from({length:20},()=>{
-    const n=rnd(10,100);
-    const type=rnd(0,1);
-    if(type===0){
-      // ¿Qué número es?
-      return{type:'text',q:`¿Qué número es ${n}?`,answer:String(n),opts:sh([String(n),...wrongSet(n,3,Math.max(10,n-10),Math.min(100,n+10)).map(String)])};
-    }else{
-      // Número anterior / siguiente
-      const which=rnd(0,1);
-      const ans=which===0?n-1:n+1;
-      const q=which===0?`¿Qué número va antes de ${n}?`:`¿Qué número va después de ${n}?`;
-      return{type:'text',q,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(1,ans-5),Math.min(100,ans+5)).map(String)])};
-    }
-  });
+// Inject any previously failed questions for this level at the end
+function buildSessionQuestions(subj, lvl) {
+  const fresh = genLevel(subj, lvl);
+  const key = `${subj}-${lvl}`;
+  const failed = (D.failedQuestions || {})[key] || [];
+  // Re-append failed questions (reshuffled opts) at the end
+  const retries = failed.map(q => Object.assign({}, q, {opts: sh(q.opts), _retry: true}));
+  return [...fresh, ...retries];
 }
 
-// 1 · Decenas y unidades
-function qPlaceValue(){
-  return Array.from({length:20},()=>{
-    const dec=rnd(1,9),uni=rnd(0,9),n=dec*10+uni;
-    const type=rnd(0,2);
-    if(type===0){
-      return{type:'text',q:`${n} = ___ decenas + ___ unidades`,answer:`${dec} dec + ${uni} uni`,opts:sh([`${dec} dec + ${uni} uni`,`${uni} dec + ${dec} uni`,`${dec+1} dec + ${uni} uni`,`${dec} dec + ${uni+1} uni`])};
-    }else if(type===1){
-      return{type:'text',q:`¿Cuántas decenas tiene ${n}?`,answer:String(dec),opts:sh([String(dec),...wrongSet(dec,3,1,9).map(String)])};
-    }else{
-      return{type:'text',q:`¿Cuántas unidades tiene ${n}?`,answer:String(uni),opts:sh([String(uni),...wrongSet(uni,3,0,9).map(String)])};
-    }
-  });
-}
+// Math generators
+function qNumbers(){return Array.from({length:20},()=>{const n=rnd(10,100),type=rnd(0,1);if(type===0){return{type:'text',q:`¿Qué número es ${n}?`,answer:String(n),opts:sh([String(n),...wrongSet(n,3,Math.max(10,n-10),Math.min(100,n+10)).map(String)])}}else{const w=rnd(0,1),ans=w===0?n-1:n+1;return{type:'text',q:w===0?`¿Qué número va antes de ${n}?`:`¿Qué número va después de ${n}?`,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(1,ans-5),Math.min(100,ans+5)).map(String)])}}});}
+function qPlaceValue(){return Array.from({length:20},()=>{const dec=rnd(1,9),uni=rnd(0,9),n=dec*10+uni,t=rnd(0,2);if(t===0){return{type:'text',q:`${n} = ___ decenas + ___ unidades`,answer:`${dec} dec + ${uni} uni`,opts:sh([`${dec} dec + ${uni} uni`,`${uni} dec + ${dec} uni`,`${dec+1} dec + ${uni} uni`,`${dec} dec + ${uni+1} uni`])}}else if(t===1){return{type:'text',q:`¿Cuántas decenas tiene ${n}?`,answer:String(dec),opts:sh([String(dec),...wrongSet(dec,3,1,9).map(String)])}}else{return{type:'text',q:`¿Cuántas unidades tiene ${n}?`,answer:String(uni),opts:sh([String(uni),...wrongSet(uni,3,0,9).map(String)])}}});}
+function qCompare(){const sy=['<','>','='];return Array.from({length:20},()=>{const a=rnd(1,99),b=rnd(0,1)===0?a:rnd(1,99),ans=a>b?'>':a<b?'<':'=';return{type:'text',q:`${a}   ___   ${b}`,hint:'Elige el símbolo: < = >',answer:ans,opts:sy}});}
+function qAddSimple(){return Array.from({length:20},()=>{let a,b;do{a=rnd(10,60);b=rnd(10,30);}while((a%10)+(b%10)>=10||a+b>99);const ans=a+b;return{type:'calc',q:`${a} + ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(10,ans-9),Math.min(99,ans+9))])}});}
+function qAddCarry(){return Array.from({length:20},()=>{let a,b;do{a=rnd(5,49);b=rnd(5,49);}while((a%10)+(b%10)<10||a+b>99);const ans=a+b;return{type:'calc',q:`${a} + ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(10,ans-9),Math.min(99,ans+9))])}});}
+function qSubSimple(){return Array.from({length:20},()=>{let a,b;do{a=rnd(20,80);b=rnd(10,40);}while(a<=b||(a%10)<(b%10));const ans=a-b;return{type:'calc',q:`${a} − ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(0,ans-9),ans+9)])}});}
+function qSubBorrow(){return Array.from({length:20},()=>{let a,b;do{a=rnd(20,80);b=rnd(5,40);}while(a<=b||(a%10)>=(b%10));const ans=a-b;return{type:'calc',q:`${a} − ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(0,ans-9),ans+9)])}});}
+function qMult25(){return Array.from({length:20},(_,i)=>{const base=i<10?2:5,b=rnd(1,10),ans=base*b;return{type:'calc',q:`${base} × ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(2,ans-8),ans+8)])}});}
+function qMult10(){return Array.from({length:20},(_,i)=>{if(i%3===2){return{type:'text',q:`10 + 10 + 10 + 10 = 10 × ?`,answer:'4',opts:sh(['3','4','5','6'])}}const b=rnd(1,10),ans=10*b;return{type:'calc',q:`10 × ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,10,100)])}});}
+function qDiv(){const P=[{q:'10 dulces entre 2 niños. ¿Cuántos a cada uno?',a:5,o:[3,4,5,6]},{q:'12 manzanas entre 3 canastas. ¿Cuántas en cada una?',a:4,o:[3,4,5,6]},{q:'20 fichas entre 4 grupos. ¿Cuántas por grupo?',a:5,o:[4,5,6,7]},{q:'15 galletas entre 3 amigos. ¿Cuántas a cada uno?',a:5,o:[4,5,6,3]},{q:'8 lápices entre 2 estuches. ¿Cuántos en cada uno?',a:4,o:[3,4,5,6]},{q:'18 pelotas entre 3 cajas. ¿Cuántas en cada caja?',a:6,o:[5,6,7,4]},{q:'16 cartas entre 4 jugadores. ¿Cuántas a cada uno?',a:4,o:[3,4,5,6]},{q:'14 flores entre 2 jarrones. ¿Cuántas en cada uno?',a:7,o:[6,7,8,5]}];return Array.from({length:20},(_,i)=>{const p=P[i%P.length];return{type:'text',q:p.q,answer:String(p.a),opts:sh(p.o.map(String))}});}
+function qMeasure(){const P=[{q:'¿Cuántos cm tiene 1 metro?',a:'100',o:['10','100','1000','50']},{q:'¿Qué es más largo: 1 m o 90 cm?',a:'1 m',o:['90 cm','1 m','son iguales','no se sabe']},{q:'¿Qué unidad usamos para medir una habitación?',a:'metros',o:['metros','kilómetros','gramos','litros']},{q:'¿Qué unidad usamos para pesar una manzana?',a:'gramos',o:['gramos','kilómetros','litros','metros']},{q:'2 kg + 500 g = ?',a:'2500 g',o:['2500 g','250 g','25000 g','2050 g']},{q:'Un lápiz mide 15 cm y otro 8 cm. ¿Cuánto miden juntos?',a:'23 cm',o:['21 cm','22 cm','23 cm','24 cm']},{q:'¿Qué instrumento usamos para medir longitud?',a:'regla',o:['regla','balanza','termómetro','reloj']},{q:'Una niña mide 120 cm. ¿Cuánto es en metros?',a:'1,20 m',o:['1,20 m','12 m','0,12 m','120 m']}];return Array.from({length:20},(_,i)=>{const it=P[i%P.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)}});}
+function qTimeMoney(){const P=[{q:'¿Cuántos minutos tiene 1 hora?',a:'60',o:['30','60','100','24']},{q:'¿Cuántas horas tiene 1 día?',a:'24',o:['12','24','48','60']},{q:'¿Cuántos días tiene 1 semana?',a:'7',o:['5','6','7','8']},{q:'¿Cuántos meses tiene 1 año?',a:'12',o:['10','11','12','13']},{q:'Son las 3:00. ¿Qué hora será en 2 horas?',a:'5:00',o:['4:00','5:00','6:00','3:20']},{q:'Entro a las 7:00 y salgo a las 12:00. ¿Cuántas horas?',a:'5 horas',o:['4 horas','5 horas','6 horas','7 horas']},{q:'Tengo $500. Compro algo de $200. ¿Cuánto me queda?',a:'$300',o:['$200','$300','$400','$100']},{q:'Un jugo vale $150 y una galleta $100. ¿Cuánto pago?',a:'$250',o:['$150','$200','$250','$300']},{q:'¿Qué día viene después del viernes?',a:'sábado',o:['jueves','viernes','sábado','domingo']}];return Array.from({length:20},(_,i)=>{const it=P[i%P.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)}});}
+function qProblemAdd(){return Array.from({length:20},()=>{const a=rnd(5,40),b=rnd(5,40),ans=a+b,T=[`Tenía ${a} y me dieron ${b} más. ¿Cuántos tengo?`,`Hay ${a} rojos y ${b} azules. ¿Cuántos en total?`,`El lunes leí ${a} páginas y el martes ${b}. ¿Cuántas en total?`,`Hay ${a} niñas y ${b} niños. ¿Cuántos estudiantes?`,`Un árbol tiene ${a} manzanas y otro ${b}. ¿Cuántas en total?`];return{type:'text',q:T[rnd(0,T.length-1)],answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(5,ans-10),ans+10).map(String)])}});}
+function qProblemSub(){return Array.from({length:20},()=>{const total=rnd(15,60),gasto=rnd(3,total-5),ans=total-gasto,T=[`Tenía ${total} y gasté ${gasto}. ¿Cuántos quedan?`,`Había ${total} pájaros y volaron ${gasto}. ¿Cuántos quedan?`,`Tenía ${total} fichas y perdí ${gasto}. ¿Cuántas me quedan?`,`De ${total} estudiantes, ${gasto} faltaron. ¿Cuántos asistieron?`];return{type:'text',q:T[rnd(0,T.length-1)],answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(1,ans-8),ans+8).map(String)])}});}
+function qGeometry(){const P=[{q:'¿Cuántos lados tiene un triángulo?',a:'3',o:['2','3','4','5']},{q:'¿Cuántos lados tiene un cuadrado?',a:'4',o:['3','4','5','6']},{q:'¿Cuántos lados tiene un círculo?',a:'0',o:['0','1','2','4']},{q:'¿Cuántos lados tiene un pentágono?',a:'5',o:['4','5','6','7']},{q:'¿Qué figura no tiene esquinas?',a:'círculo',o:['círculo','cuadrado','triángulo','rectángulo']},{q:'La puerta de tu casa tiene forma de…',a:'rectángulo',o:['círculo','triángulo','rectángulo','cuadrado']},{q:'La rueda de una bicicleta tiene forma de…',a:'círculo',o:['círculo','cuadrado','triángulo','rectángulo']},{q:'¿Cuántos vértices tiene un triángulo?',a:'3',o:['2','3','4','5']},{q:'Un cuadrado tiene 4 lados. ¿Cuántos lados tienen 2 cuadrados?',a:'8',o:['4','6','8','10']},{q:'¿Qué figura tiene 2 lados largos y 2 cortos?',a:'rectángulo',o:['círculo','cuadrado','triángulo','rectángulo']},{q:'¿Cuántas esquinas tiene un cuadrado?',a:'4',o:['3','4','5','6']},{q:'¿Qué figura tiene 3 lados y 3 vértices?',a:'triángulo',o:['cuadrado','triángulo','círculo','rectángulo']}];return Array.from({length:20},(_,i)=>{const it=P[i%P.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)}});}
+function qPatterns(){return Array.from({length:20},()=>{const t=rnd(0,2);if(t===0){const start=rnd(1,10),step=rnd(1,5),seq=[start,start+step,start+step*2,start+step*3],ans=start+step*4;return{type:'text',q:`¿Qué número sigue? ${seq.join(', ')}, ___`,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(1,ans-8),ans+8).map(String)])}}else if(t===1){const base=[2,5,10][rnd(0,2)],start=rnd(1,5)*base,seq=[start,start+base,start+base*2,start+base*3],ans=start+base*4;return{type:'text',q:`Cuenta de ${base} en ${base}: ${seq.join(', ')}, ___`,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(base,ans-base*2),ans+base*2).map(String)])}}else{const R=[{q:'¿Qué número falta? 2, 4, ___, 8, 10',a:'6',o:['5','6','7','8']},{q:'¿Qué número falta? 5, 10, 15, ___, 25',a:'20',o:['18','19','20','21']},{q:'¿Qué número falta? 10, 20, ___, 40, 50',a:'30',o:['25','30','35','45']},{q:'¿Qué número falta? 1, 3, 5, ___, 9',a:'7',o:['6','7','8','10']},{q:'¿Qué número falta? 100, 90, 80, ___, 60',a:'70',o:['65','70','75','85']}];const it=R[rnd(0,R.length-1)];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)}}});}
 
-// 2 · Comparar números
-function qCompare(){
-  const sy=['<','>','='];
-  return Array.from({length:20},()=>{
-    // Mix: some equal, mostly different, range up to 100
-    const a=rnd(1,99),b=rnd(0,1)===0?a:rnd(1,99);
-    const ans=a>b?'>':a<b?'<':'=';
-    return{type:'text',q:`${a}   ___   ${b}`,hint:'Elige el símbolo: < = >',answer:ans,opts:sy};
-  });
-}
-
-// 3 · Sumas sin llevar (result < 100, no carrying needed)
-function qAddSimple(){
-  return Array.from({length:20},()=>{
-    // Ensure no carrying: units digits sum < 10
-    let a,b;
-    do{a=rnd(10,60);b=rnd(10,30);}while((a%10)+(b%10)>=10||a+b>99);
-    const ans=a+b;
-    return{type:'calc',q:`${a} + ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(10,ans-9),Math.min(99,ans+9))])};
-  });
-}
-
-// 4 · Sumas con llevada
-function qAddCarry(){
-  return Array.from({length:20},()=>{
-    // Ensure carrying: units digits sum >= 10
-    let a,b;
-    do{a=rnd(5,49);b=rnd(5,49);}while((a%10)+(b%10)<10||a+b>99);
-    const ans=a+b;
-    return{type:'calc',q:`${a} + ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(10,ans-9),Math.min(99,ans+9))])};
-  });
-}
-
-// 5 · Restas sin llevar
-function qSubSimple(){
-  return Array.from({length:20},()=>{
-    let a,b;
-    do{a=rnd(20,80);b=rnd(10,40);}while(a<=b||(a%10)<(b%10));
-    const ans=a-b;
-    return{type:'calc',q:`${a} − ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(0,ans-9),ans+9)])};
-  });
-}
-
-// 6 · Restas con préstamo
-function qSubBorrow(){
-  return Array.from({length:20},()=>{
-    let a,b;
-    do{a=rnd(20,80);b=rnd(5,40);}while(a<=b||(a%10)>=(b%10));
-    const ans=a-b;
-    return{type:'calc',q:`${a} − ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(0,ans-9),ans+9)])};
-  });
-}
-
-// 7 · Tablas del 2 y del 5
-function qMult25(){
-  return Array.from({length:20},(_,i)=>{
-    const base=i<10?2:5;
-    const b=rnd(1,10),ans=base*b;
-    return{type:'calc',q:`${base} × ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(2,ans-8),ans+8)])};
-  });
-}
-
-// 8 · Tabla del 10
-function qMult10(){
-  return Array.from({length:20},()=>{
-    const b=rnd(1,10),ans=10*b;
-    const type=rnd(0,1);
-    if(type===0){
-      return{type:'calc',q:`10 × ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,10,100)])};
-    }else{
-      // Conceptual: multiplicar es sumar varias veces
-      return{type:'text',q:`10 + 10 + 10 + 10 = 10 × ?`,answer:'4',opts:sh(['3','4','5','6'])};
-    }
-  });
-}
-
-// 9 · División básica — repartir en partes iguales
-function qDiv(){
-  const problems=[
-    {q:'10 dulces entre 2 niños. ¿Cuántos le toca a cada uno?',a:5,o:[3,4,5,6]},
-    {q:'12 manzanas entre 3 canastas. ¿Cuántas en cada canasta?',a:4,o:[3,4,5,6]},
-    {q:'20 fichas entre 4 grupos. ¿Cuántas por grupo?',a:5,o:[4,5,6,7]},
-    {q:'15 galletas entre 3 amigos. ¿Cuántas a cada uno?',a:5,o:[4,5,6,3]},
-    {q:'8 lápices entre 2 estuches. ¿Cuántos en cada uno?',a:4,o:[3,4,5,6]},
-    {q:'18 pelotas entre 3 cajas. ¿Cuántas en cada caja?',a:6,o:[5,6,7,4]},
-    {q:'16 cartas entre 4 jugadores. ¿Cuántas a cada uno?',a:4,o:[3,4,5,6]},
-    {q:'14 flores entre 2 jarrones. ¿Cuántas en cada jarrón?',a:7,o:[6,7,8,5]},
-  ];
-  return Array.from({length:20},(_,i)=>{
-    const p=problems[i%problems.length];
-    return{type:'text',q:p.q,answer:String(p.a),opts:sh(p.o.map(String))};
-  });
-}
-
-// 10 · Longitud y peso
-function qMeasure(){
-  const pool=[
-    {q:'¿Cuántos cm tiene 1 metro?',a:'100',o:['10','100','1000','50']},
-    {q:'Una regla mide 30 cm. ¿Cuántos mm son?',a:'300',o:['30','300','3000','3']},
-    {q:'¿Qué es más largo: 1 m o 90 cm?',a:'1 m',o:['90 cm','1 m','son iguales','no se puede saber']},
-    {q:'¿Cuántos kg pesa más: 3 kg o 2500 g?',a:'3 kg',o:['2500 g','3 kg','son iguales','no se sabe']},
-    {q:'Una niña mide 120 cm. ¿Cuánto es en metros?',a:'1,20 m',o:['1,20 m','12 m','0,12 m','120 m']},
-    {q:'¿Qué unidad usamos para medir una habitación?',a:'metros',o:['metros','kilómetros','gramos','litros']},
-    {q:'¿Qué unidad usamos para pesar una manzana?',a:'gramos',o:['gramos','kilómetros','litros','metros']},
-    {q:'2 kg + 500 g = ?',a:'2500 g',o:['2500 g','250 g','25000 g','2050 g']},
-    {q:'Un lápiz mide 15 cm y otro 8 cm. ¿Cuánto miden juntos?',a:'23 cm',o:['21 cm','22 cm','23 cm','24 cm']},
-    {q:'¿Qué instrumento usamos para medir longitud?',a:'regla',o:['regla','balanza','termómetro','reloj']},
-  ];
-  return Array.from({length:20},(_,i)=>{
-    const it=pool[i%pool.length];
-    return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};
-  });
-}
-
-// 11 · Tiempo y dinero
-function qTimeMoney(){
-  const pool=[
-    {q:'¿Cuántos minutos tiene 1 hora?',a:'60',o:['30','60','100','24']},
-    {q:'¿Cuántas horas tiene 1 día?',a:'24',o:['12','24','48','60']},
-    {q:'¿Cuántos días tiene 1 semana?',a:'7',o:['5','6','7','8']},
-    {q:'¿Cuántos meses tiene 1 año?',a:'12',o:['10','11','12','13']},
-    {q:'Son las 3:00. ¿Qué hora será en 2 horas?',a:'5:00',o:['4:00','5:00','6:00','3:20']},
-    {q:'Si entro al colegio a las 7:00 y salgo a las 12:00, ¿cuántas horas estoy?',a:'5 horas',o:['4 horas','5 horas','6 horas','7 horas']},
-    {q:'Tengo $500. Compro algo de $200. ¿Cuánto me queda?',a:'$300',o:['$200','$300','$400','$100']},
-    {q:'Un jugo vale $150 y una galleta $100. ¿Cuánto pago?',a:'$250',o:['$150','$200','$250','$300']},
-    {q:'¿Cuántos días hay en febrero (año normal)?',a:'28',o:['28','29','30','31']},
-    {q:'¿Qué día viene después del viernes?',a:'sábado',o:['jueves','viernes','sábado','domingo']},
-  ];
-  return Array.from({length:20},(_,i)=>{
-    const it=pool[i%pool.length];
-    return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};
-  });
-}
-
-// 12 · Problemas con sumas
-function qProblemAdd(){
-  return Array.from({length:20},()=>{
-    const a=rnd(5,40),b=rnd(5,40),ans=a+b;
-    const templates=[
-      `Tenía ${a} y me dieron ${b} más. ¿Cuántos tengo ahora?`,
-      `En la caja hay ${a} rojos y ${b} azules. ¿Cuántos hay en total?`,
-      `El lunes leí ${a} páginas y el martes ${b}. ¿Cuántas en total?`,
-      `Hay ${a} niñas y ${b} niños. ¿Cuántos estudiantes son?`,
-      `Un árbol tiene ${a} manzanas y otro ${b}. ¿Cuántas en total?`,
-    ];
-    const q=templates[rnd(0,templates.length-1)];
-    return{type:'text',q,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(5,ans-10),ans+10).map(String)])};
-  });
-}
-
-// 13 · Problemas con restas
-function qProblemSub(){
-  return Array.from({length:20},()=>{
-    const total=rnd(15,60),gasto=rnd(3,total-5),ans=total-gasto;
-    const templates=[
-      `Tenía ${total} y gasté ${gasto}. ¿Cuántos quedan?`,
-      `Había ${total} pájaros y volaron ${gasto}. ¿Cuántos quedan?`,
-      `Tenía ${total} fichas y perdí ${gasto}. ¿Cuántas me quedan?`,
-      `De ${total} estudiantes, ${gasto} faltaron. ¿Cuántos asistieron?`,
-      `Compré ${total} y ya usé ${gasto}. ¿Cuántos me faltan por usar?`,
-    ];
-    const q=templates[rnd(0,templates.length-1)];
-    return{type:'text',q,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(1,ans-8),ans+8).map(String)])};
-  });
-}
-
-// 14 · Figuras geométricas
-function qGeometry(){
-  const pool=[
-    {q:'¿Cuántos lados tiene un triángulo?',a:'3',o:['2','3','4','5']},
-    {q:'¿Cuántos lados tiene un cuadrado?',a:'4',o:['3','4','5','6']},
-    {q:'¿Cuántos lados tiene un rectángulo?',a:'4',o:['3','4','5','6']},
-    {q:'¿Cuántos lados tiene un círculo?',a:'0',o:['0','1','2','4']},
-    {q:'¿Cuántos lados tiene un pentágono?',a:'5',o:['4','5','6','7']},
-    {q:'¿Qué figura tiene todos sus lados iguales y 4 lados?',a:'cuadrado',o:['cuadrado','rectángulo','triángulo','círculo']},
-    {q:'¿Qué figura no tiene esquinas?',a:'círculo',o:['círculo','cuadrado','triángulo','rectángulo']},
-    {q:'La puerta de tu casa tiene forma de…',a:'rectángulo',o:['círculo','triángulo','rectángulo','cuadrado']},
-    {q:'La rueda de una bicicleta tiene forma de…',a:'círculo',o:['círculo','cuadrado','triángulo','rectángulo']},
-    {q:'¿Cuántos vértices tiene un triángulo?',a:'3',o:['2','3','4','5']},
-    {q:'Un cuadrado tiene 4 lados. ¿Cuántos lados tienen 2 cuadrados?',a:'8',o:['4','6','8','10']},
-    {q:'¿Qué figura tiene 2 lados largos y 2 lados cortos?',a:'rectángulo',o:['círculo','cuadrado','triángulo','rectángulo']},
-    {q:'¿Cuántas esquinas tiene un cuadrado?',a:'4',o:['3','4','5','6']},
-    {q:'Una pizza entera tiene forma de…',a:'círculo',o:['círculo','cuadrado','triángulo','rectángulo']},
-    {q:'¿Qué figura tiene 3 lados y 3 vértices?',a:'triángulo',o:['cuadrado','triángulo','círculo','rectángulo']},
-  ];
-  return Array.from({length:20},(_,i)=>{
-    const it=pool[i%pool.length];
-    return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};
-  });
-}
-
-// 15 · Secuencias y patrones
-function qPatterns(){
-  return Array.from({length:20},()=>{
-    const type=rnd(0,2);
-    if(type===0){
-      // Numeric sequence
-      const start=rnd(1,10),step=rnd(1,5);
-      const seq=[start,start+step,start+step*2,start+step*3];
-      const ans=start+step*4;
-      return{type:'text',q:`¿Qué número sigue? ${seq.join(', ')}, ___`,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(1,ans-8),ans+8).map(String)])};
-    }else if(type===1){
-      // Count by 2s or 5s or 10s
-      const base=[2,5,10][rnd(0,2)];
-      const start=rnd(1,5)*base;
-      const seq=[start,start+base,start+base*2,start+base*3];
-      const ans=start+base*4;
-      return{type:'text',q:`Cuenta de ${base} en ${base}: ${seq.join(', ')}, ___`,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(base,ans-base*2),ans+base*2).map(String)])};
-    }else{
-      // Classification / rule detection
-      const rules=[
-        {q:'¿Qué número falta? 2, 4, ___, 8, 10',a:'6',o:['5','6','7','8']},
-        {q:'¿Qué número falta? 5, 10, 15, ___, 25',a:'20',o:['18','19','20','21']},
-        {q:'¿Qué número falta? 10, 20, ___, 40, 50',a:'30',o:['25','30','35','45']},
-        {q:'¿Qué número falta? 1, 3, 5, ___, 9',a:'7',o:['6','7','8','10']},
-        {q:'¿Qué número falta? 100, 90, 80, ___, 60',a:'70',o:['65','70','75','85']},
-        {q:'Regla: +3. Sigue la serie: 3, 6, 9, ___',a:'12',o:['10','11','12','13']},
-        {q:'¿Cuál es la regla? 4, 8, 12, 16…',a:'sumar 4',o:['sumar 2','sumar 3','sumar 4','sumar 5']},
-      ];
-      const it=rules[rnd(0,rules.length-1)];
-      return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};
-    }
-  });
-}
-
-// ── READ GENERATORS (unchanged) ───────────────────────────────
+// Read generators
 const VOW_POOL=[{w:'árbol',a:'a'},{w:'iglesia',a:'i'},{w:'oso',a:'o'},{w:'uva',a:'u'},{w:'elefante',a:'e'},{w:'isla',a:'i'},{w:'ángel',a:'a'},{w:'oreja',a:'o'},{w:'uniforme',a:'u'},{w:'escuela',a:'e'},{w:'avión',a:'a'},{w:'oveja',a:'o'},{w:'imán',a:'i'},{w:'útil',a:'u'},{w:'era',a:'e'}];
-function qVowels(){return Array.from({length:20},(_,i)=>{const it=VOW_POOL[i%VOW_POOL.length],wr=sh(['a','e','i','o','u'].filter(x=>x!==it.a)).slice(0,3);return{type:'text',q:`¿Con qué vocal empieza "${it.w}"?`,answer:it.a,opts:sh([it.a,...wr])};});}
-
+function qVowels(){return Array.from({length:20},(_,i)=>{const it=VOW_POOL[i%VOW_POOL.length],wr=sh(['a','e','i','o','u'].filter(x=>x!==it.a)).slice(0,3);return{type:'text',q:`¿Con qué vocal empieza "${it.w}"?`,answer:it.a,opts:sh([it.a,...wr])}});}
 const SYL_POOL=[{q:'"mamá"',a:'2'},{q:'"mariposa"',a:'4'},{q:'"sol"',a:'1'},{q:'"elefante"',a:'4'},{q:'"mesa"',a:'2'},{q:'"ventana"',a:'3'},{q:'"pan"',a:'1'},{q:'"paraguas"',a:'3'},{q:'"computadora"',a:'5'},{q:'"libro"',a:'2'},{q:'"pelota"',a:'3'},{q:'"casa"',a:'2'},{q:'"chocolate"',a:'4'},{q:'"tren"',a:'1'},{q:'"murciélago"',a:'5'}];
-function qSyllables(){return Array.from({length:20},(_,i)=>{const it=SYL_POOL[i%SYL_POOL.length];const others=sh(['1','2','3','4','5','6'].filter(x=>x!==it.a)).slice(0,3);return{type:'text',q:`¿Cuántas sílabas tiene ${it.q}?`,answer:it.a,opts:sh([it.a,...others])};});}
-
+function qSyllables(){return Array.from({length:20},(_,i)=>{const it=SYL_POOL[i%SYL_POOL.length],others=sh(['1','2','3','4','5','6'].filter(x=>x!==it.a)).slice(0,3);return{type:'text',q:`¿Cuántas sílabas tiene ${it.q}?`,answer:it.a,opts:sh([it.a,...others])}});}
 const WORD_POOL=[{p:'🐱',w:'gato',o:['gato','pato','rato','dato']},{p:'🌸',w:'flor',o:['flor','piel','biol','flan']},{p:'🌙',w:'luna',o:['luna','lana','lona','cuna']},{p:'🦁',w:'león',o:['lión','bión','león','sión']},{p:'🏠',w:'casa',o:['masa','pasa','casa','tasa']},{p:'🐦',w:'pájaro',o:['pájaro','páramo','pájalo','péjaro']},{p:'🌳',w:'árbol',o:['árbol','álbol','árbor','árpol']},{p:'⭐',w:'estrella',o:['estrilla','estrella','estralla','estrela']},{p:'🍦',w:'helado',o:['helado','heledo','hilado','heladoz']},{p:'🐟',w:'pez',o:['vez','mes','pez','pes']}];
-function qWords(){return Array.from({length:20},(_,i)=>{const it=WORD_POOL[i%WORD_POOL.length];return{type:'text',q:`¿Qué palabra corresponde a ${it.p}?`,answer:it.w,opts:sh(it.o)};});}
-
+function qWords(){return Array.from({length:20},(_,i)=>{const it=WORD_POOL[i%WORD_POOL.length];return{type:'text',q:`¿Qué palabra corresponde a ${it.p}?`,answer:it.w,opts:sh(it.o)}});}
 const COMPL_POOL=[{s:'El gato duerme en la ___.',a:'cama',o:['cama','lago','nube','tren']},{s:'La niña come una ___ roja.',a:'manzana',o:['manzana','silla','nube','rueda']},{s:'El sol brilla en el ___.',a:'cielo',o:['cielo','suelo','bolso','marco']},{s:'Los peces viven en el ___.',a:'agua',o:['agua','suelo','cielo','fuego']},{s:'Por la noche brilla la ___.',a:'luna',o:['luna','tierra','flor','mesa']},{s:'Cuando llueve usamos ___.',a:'paraguas',o:['paraguas','sombrero','guantes','bufanda']},{s:'Las flores crecen en el ___.',a:'jardín',o:['jardín','techo','libro','cajón']},{s:'El avión vuela por el ___.',a:'cielo',o:['cielo','mar','pasto','túnel']},{s:'Los niños van a la ___ a aprender.',a:'escuela',o:['escuela','tienda','piscina','montaña']},{s:'El perro mueve la ___.',a:'cola',o:['cola','cabeza','pata','oreja']}];
-function qComplete(){return Array.from({length:20},(_,i)=>{const it=COMPL_POOL[i%COMPL_POOL.length];return{type:'text',q:'Completa la frase:',hint:it.s,answer:it.a,opts:sh(it.o)};});}
-
-const COMT_POOL=[{s:'Ana tiene 3 gatos. Uno negro, uno blanco y uno naranja.',q:'¿Cuántos gatos tiene Ana?',a:'3',o:['2','3','4','5']},{s:'El pájaro vuela sobre las nubes azules.',q:'¿Dónde vuela el pájaro?',a:'sobre las nubes',o:['en el agua','sobre las nubes','bajo la tierra','en la casa']},{s:'María tiene 5 años. Su hermano tiene 7.',q:'¿Quién es mayor?',a:'el hermano',o:['María','el hermano','los dos','ninguno']},{s:'Carlos corrió más rápido que Pedro pero más lento que Lucía.',q:'¿Quién llegó primero?',a:'Lucía',o:['Carlos','Pedro','Lucía','todos igual']},{s:'El cielo está gris y cae agua.',q:'¿Qué tiempo hace?',a:'llueve',o:['hace sol','llueve','nieva','hay viento']},{s:'Hay 10 niños en clase. 4 son niñas.',q:'¿Cuántos niños hay?',a:'6',o:['4','5','6','7']},{s:'La vaca da leche. Con la leche hacemos queso.',q:'¿Qué animal da leche?',a:'la vaca',o:['la vaca','el perro','el gato','el cerdo']},{s:'El tren sale a las 9 y llega a las 11.',q:'¿Cuánto dura el viaje?',a:'2 horas',o:['1 hora','2 horas','3 horas','4 horas']},{s:'Pedro tiene 2 hermanas y 1 hermano.',q:'¿Cuántos hermanos en total?',a:'3',o:['2','3','4','5']},{s:'Los lunes y miércoles hay música.',q:'¿Cuántos días de música?',a:'2',o:['1','2','3','4']}];
-function qComp(){return Array.from({length:20},(_,i)=>{const it=COMT_POOL[i%COMT_POOL.length];return{type:'text',q:it.q,hint:it.s,answer:it.a,opts:sh(it.o)};});}
-
-const SYN_POOL=[{q:'Sinónimo de "feliz"',a:'contento',o:['contento','triste','cansado','aburrido']},{q:'Sinónimo de "bonito"',a:'hermoso',o:['hermoso','feo','raro','oscuro']},{q:'Sinónimo de "correr"',a:'trotar',o:['trotar','dormir','comer','leer']},{q:'Sinónimo de "grande"',a:'enorme',o:['enorme','pequeño','delgado','corto']},{q:'Sinónimo de "rápido"',a:'veloz',o:['veloz','lento','quieto','suave']},{q:'Sinónimo de "casa"',a:'hogar',o:['hogar','calle','plaza','lago']},{q:'Sinónimo de "miedo"',a:'susto',o:['susto','alegría','amor','paz']},{q:'Sinónimo de "hablar"',a:'decir',o:['decir','callar','dormir','cantar']},{q:'Sinónimo de "niño"',a:'chico',o:['chico','viejo','adulto','señor']},{q:'Sinónimo de "frío"',a:'helado',o:['helado','cálido','tibio','ardiente']}];
-function qSynonyms(){return Array.from({length:20},(_,i)=>{const it=SYN_POOL[i%SYN_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};});}
-
-const ANT_POOL=[{q:'Antónimo de "arriba"',a:'abajo',o:['abajo','lado','dentro','lejos']},{q:'Antónimo de "día"',a:'noche',o:['noche','tarde','mañana','siesta']},{q:'Antónimo de "caliente"',a:'frío',o:['frío','tibio','cálido','templado']},{q:'Antónimo de "grande"',a:'pequeño',o:['pequeño','gordo','alto','largo']},{q:'Antónimo de "rápido"',a:'lento',o:['lento','suave','tranquilo','quieto']},{q:'Antónimo de "abierto"',a:'cerrado',o:['cerrado','lleno','vacío','roto']},{q:'Antónimo de "entrar"',a:'salir',o:['salir','pasar','venir','subir']},{q:'Antónimo de "blanco"',a:'negro',o:['negro','gris','rojo','azul']},{q:'Antónimo de "alegre"',a:'triste',o:['triste','cansado','hambriento','solitario']},{q:'Antónimo de "encender"',a:'apagar',o:['apagar','romper','soltar','tirar']}];
-function qAntonyms(){return Array.from({length:20},(_,i)=>{const it=ANT_POOL[i%ANT_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};});}
-
+function qComplete(){return Array.from({length:20},(_,i)=>{const it=COMPL_POOL[i%COMPL_POOL.length];return{type:'text',q:'Completa la frase:',hint:it.s,answer:it.a,opts:sh(it.o)}});}
+const COMT_POOL=[{s:'Ana tiene 3 gatos. Uno negro, uno blanco y uno naranja.',q:'¿Cuántos gatos tiene Ana?',a:'3',o:['2','3','4','5']},{s:'El pájaro vuela sobre las nubes azules.',q:'¿Dónde vuela el pájaro?',a:'sobre las nubes',o:['en el agua','sobre las nubes','bajo la tierra','en la casa']},{s:'María tiene 5 años. Su hermano tiene 7.',q:'¿Quién es mayor?',a:'el hermano',o:['María','el hermano','los dos','ninguno']},{s:'Carlos corrió más rápido que Pedro pero más lento que Lucía.',q:'¿Quién llegó primero?',a:'Lucía',o:['Carlos','Pedro','Lucía','todos igual']},{s:'El cielo está gris y cae agua.',q:'¿Qué tiempo hace?',a:'llueve',o:['hace sol','llueve','nieva','hay viento']},{s:'Hay 10 niños en clase. 4 son niñas.',q:'¿Cuántos niños hay?',a:'6',o:['4','5','6','7']},{s:'La vaca da leche. Con la leche hacemos queso.',q:'¿Qué animal da leche?',a:'la vaca',o:['la vaca','el perro','el gato','el cerdo']},{s:'El tren sale a las 9 y llega a las 11.',q:'¿Cuánto dura el viaje?',a:'2 horas',o:['1 hora','2 horas','3 horas','4 horas']}];
+function qComp(){return Array.from({length:20},(_,i)=>{const it=COMT_POOL[i%COMT_POOL.length];return{type:'text',q:it.q,hint:it.s,answer:it.a,opts:sh(it.o)}});}
+const SYN_POOL=[{q:'Sinónimo de "feliz"',a:'contento',o:['contento','triste','cansado','aburrido']},{q:'Sinónimo de "bonito"',a:'hermoso',o:['hermoso','feo','raro','oscuro']},{q:'Sinónimo de "correr"',a:'trotar',o:['trotar','dormir','comer','leer']},{q:'Sinónimo de "grande"',a:'enorme',o:['enorme','pequeño','delgado','corto']},{q:'Sinónimo de "rápido"',a:'veloz',o:['veloz','lento','quieto','suave']},{q:'Sinónimo de "casa"',a:'hogar',o:['hogar','calle','plaza','lago']},{q:'Sinónimo de "miedo"',a:'susto',o:['susto','alegría','amor','paz']},{q:'Sinónimo de "hablar"',a:'decir',o:['decir','callar','dormir','cantar']}];
+function qSynonyms(){return Array.from({length:20},(_,i)=>{const it=SYN_POOL[i%SYN_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)}});}
+const ANT_POOL=[{q:'Antónimo de "arriba"',a:'abajo',o:['abajo','lado','dentro','lejos']},{q:'Antónimo de "día"',a:'noche',o:['noche','tarde','mañana','siesta']},{q:'Antónimo de "caliente"',a:'frío',o:['frío','tibio','cálido','templado']},{q:'Antónimo de "grande"',a:'pequeño',o:['pequeño','gordo','alto','largo']},{q:'Antónimo de "rápido"',a:'lento',o:['lento','suave','tranquilo','quieto']},{q:'Antónimo de "abierto"',a:'cerrado',o:['cerrado','lleno','vacío','roto']},{q:'Antónimo de "entrar"',a:'salir',o:['salir','pasar','venir','subir']},{q:'Antónimo de "blanco"',a:'negro',o:['negro','gris','rojo','azul']}];
+function qAntonyms(){return Array.from({length:20},(_,i)=>{const it=ANT_POOL[i%ANT_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)}});}
 const SYLID_POOL=[{q:'Sílaba inicial de "pelota"',a:'pe',o:['pe','po','pi','pa']},{q:'Sílaba inicial de "mariposa"',a:'ma',o:['ma','mi','mo','me']},{q:'Sílaba inicial de "camino"',a:'ca',o:['ca','co','cu','ce']},{q:'¿"bra" está en cuál palabra?',a:'cabra',o:['cabra','cama','carta','capa']},{q:'¿"llo" está en cuál palabra?',a:'pollo',o:['pollo','polo','poco','poro']},{q:'¿"tre" está en cuál palabra?',a:'tres',o:['tres','tez','tej','tem']},{q:'Sílaba inicial de "escuela"',a:'es',o:['es','cu','ela','el']},{q:'¿"llo" está en cuál palabra?',a:'silla',o:['silla','sala','solo','sola']},{q:'¿"gua" está en cuál palabra?',a:'agua',o:['agua','ala','ara','ama']},{q:'Sílaba inicial de "uniforme"',a:'u',o:['u','ni','for','me']}];
-function qSylId(){return Array.from({length:20},(_,i)=>{const it=SYLID_POOL[i%SYLID_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};});}
-
-const READQ_POOL=[{s:'El perro de Lucía se llama Toby. Le gusta correr en el parque.',q:'¿Cómo se llama el perro?',a:'Toby',o:['Toby','Rocky','Max','Bruno']},{s:'En verano hace calor. Los niños van a la playa.',q:'¿Adónde van los niños?',a:'a la playa',o:['a la playa','a la montaña','a la escuela','al mercado']},{s:'Pedro tiene 2 hermanas y 1 hermano.',q:'¿Cuántos hermanos en total?',a:'3',o:['2','3','4','5']},{s:'Los lunes y miércoles hay música.',q:'¿Cuántos días de música?',a:'2',o:['1','2','3','4']},{s:'La señora García vende frutas y verduras.',q:'¿Qué vende?',a:'frutas y verduras',o:['frutas y verduras','ropa','juguetes','libros']},{s:'Sofía tiene 8 años. Su prima tiene 6.',q:'¿Quién es mayor?',a:'Sofía',o:['Sofía','la prima','las dos','ninguna']},{s:'La tortuga camina lento. El conejo corre rápido.',q:'¿Quién es más rápido?',a:'el conejo',o:['el conejo','la tortuga','los dos igual','ninguno']},{s:'El gato duerme 14 horas al día.',q:'¿Cuántas horas duerme?',a:'14',o:['8','10','14','16']}];
-function qReadQ(){return Array.from({length:20},(_,i)=>{const it=READQ_POOL[i%READQ_POOL.length];return{type:'text',q:it.q,hint:it.s,answer:it.a,opts:sh(it.o)};});}
-
-const VOC_POOL=[{q:'¿Qué es un "diccionario"?',a:'libro de palabras',o:['libro de palabras','tipo de fruta','instrumento musical','animal marino']},{q:'¿Qué significa "anochecer"?',a:'cuando llega la noche',o:['cuando llega la noche','cuando sale el sol','hora de comer','momento de jugar']},{q:'¿Qué es un "herbívoro"?',a:'animal que come plantas',o:['animal que come plantas','animal que vuela','planta carnívora','tipo de hierba']},{q:'¿Qué significa "escaso"?',a:'que hay poco',o:['que hay poco','que hay mucho','que es grande','que es rápido']},{q:'¿Qué es una "enciclopedia"?',a:'libro con mucha información',o:['libro con mucha información','canción antigua','tipo de número','herramienta de jardín']},{q:'¿Qué significa "veloz"?',a:'muy rápido',o:['muy rápido','muy lento','muy grande','muy suave']},{q:'¿Qué es un "sinónimo"?',a:'palabra con igual significado',o:['palabra con igual significado','palabra opuesta','letra del alfabeto','número grande']},{q:'¿Qué significa "enorme"?',a:'muy grande',o:['muy grande','muy pequeño','muy lejos','muy cerca']}];
-function qVocab(){return Array.from({length:20},(_,i)=>{const it=VOC_POOL[i%VOC_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};});}
+function qSylId(){return Array.from({length:20},(_,i)=>{const it=SYLID_POOL[i%SYLID_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)}});}
+const READQ_POOL=[{s:'El perro de Lucía se llama Toby.',q:'¿Cómo se llama el perro?',a:'Toby',o:['Toby','Rocky','Max','Bruno']},{s:'En verano hace calor. Los niños van a la playa.',q:'¿Adónde van los niños?',a:'a la playa',o:['a la playa','a la montaña','a la escuela','al mercado']},{s:'Pedro tiene 2 hermanas y 1 hermano.',q:'¿Cuántos hermanos en total?',a:'3',o:['2','3','4','5']},{s:'Los lunes y miércoles hay música.',q:'¿Cuántos días de música?',a:'2',o:['1','2','3','4']},{s:'La señora García vende frutas y verduras.',q:'¿Qué vende?',a:'frutas y verduras',o:['frutas y verduras','ropa','juguetes','libros']},{s:'Sofía tiene 8 años. Su prima tiene 6.',q:'¿Quién es mayor?',a:'Sofía',o:['Sofía','la prima','las dos','ninguna']},{s:'La tortuga camina lento. El conejo corre rápido.',q:'¿Quién es más rápido?',a:'el conejo',o:['el conejo','la tortuga','los dos igual','ninguno']},{s:'El gato duerme 14 horas al día.',q:'¿Cuántas horas duerme?',a:'14',o:['8','10','14','16']}];
+function qReadQ(){return Array.from({length:20},(_,i)=>{const it=READQ_POOL[i%READQ_POOL.length];return{type:'text',q:it.q,hint:it.s,answer:it.a,opts:sh(it.o)}});}
+const VOC_POOL=[{q:'¿Qué es un "diccionario"?',a:'libro de palabras',o:['libro de palabras','tipo de fruta','instrumento musical','animal marino']},{q:'¿Qué significa "anochecer"?',a:'cuando llega la noche',o:['cuando llega la noche','cuando sale el sol','hora de comer','momento de jugar']},{q:'¿Qué es un "herbívoro"?',a:'animal que come plantas',o:['animal que come plantas','animal que vuela','planta carnívora','tipo de hierba']},{q:'¿Qué significa "escaso"?',a:'que hay poco',o:['que hay poco','que hay mucho','que es grande','que es rápido']},{q:'¿Qué significa "veloz"?',a:'muy rápido',o:['muy rápido','muy lento','muy grande','muy suave']},{q:'¿Qué es un "sinónimo"?',a:'palabra con igual significado',o:['palabra con igual significado','palabra opuesta','letra del alfabeto','número grande']},{q:'¿Qué significa "enorme"?',a:'muy grande',o:['muy grande','muy pequeño','muy lejos','muy cerca']}];
+function qVocab(){return Array.from({length:20},(_,i)=>{const it=VOC_POOL[i%VOC_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)}});}
 
 // ── GAME STATE ────────────────────────────────────────────────
-let GS={};
-let _timer=null;
+let GS = {};
+let _timer = null;
 
-function startSession(subj){
-  const lvl=D.levels[subj]||0;
-  GS={subj,lvl,questions:genLevel(subj,lvl),qi:0,correct:0,errors:0,answered:false,t0:Date.now(),
-      totalAnswered:0,retryCount:0};
-  document.getElementById('g-subj').textContent=SL[subj];
-  document.getElementById('g-lvl').textContent=`Nivel ${lvl+1} — ${LN[subj][Math.min(lvl,LN[subj].length-1)]}`;
+window.startSession = async function(subj) {
+  const lvl = D.levels[subj] || 0;
+
+  // Resume saved session if it matches this subject/level
+  let questions, qi, correct, errors, totalAnswered, retryCount, t0;
+  if (D.currentSession && D.currentSession.subj === subj && D.currentSession.lvl === lvl) {
+    const cs = D.currentSession;
+    questions    = cs.questions;
+    qi           = cs.qi;
+    correct      = cs.correct;
+    errors       = cs.errors;
+    totalAnswered= cs.totalAnswered;
+    retryCount   = cs.retryCount;
+    t0           = Date.now() - cs.elapsedMs; // restore elapsed time
+  } else {
+    questions    = buildSessionQuestions(subj, lvl);
+    qi           = 0;
+    correct      = 0;
+    errors       = 0;
+    totalAnswered= 0;
+    retryCount   = 0;
+    t0           = Date.now();
+  }
+
+  GS = { subj, lvl, questions, qi, correct, errors, totalAnswered, retryCount, answered: false, t0 };
+
+  document.getElementById('g-subj').textContent = SL[subj];
+  document.getElementById('g-lvl').textContent = `Nivel ${lvl+1} — ${LN[subj][Math.min(lvl, LN[subj].length-1)]}`;
   clearInterval(_timer);
-  _timer=setInterval(()=>{
-    const s=Math.floor((Date.now()-GS.t0)/1000);
-    document.getElementById('g-timer').textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
-  },1000);
-  show('game');renderQ();
+  _timer = setInterval(() => {
+    const s = Math.floor((Date.now()-GS.t0)/1000);
+    document.getElementById('g-timer').textContent = `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+    // Auto-save session every 30 seconds
+    if (s > 0 && s % 30 === 0) saveCurrentSession();
+  }, 1000);
+  show('game');
+  renderQ();
+};
+
+async function saveCurrentSession() {
+  if (!GS.subj) return;
+  const cs = {
+    subj: GS.subj, lvl: GS.lvl,
+    questions: GS.questions, qi: GS.qi,
+    correct: GS.correct, errors: GS.errors,
+    totalAnswered: GS.totalAnswered, retryCount: GS.retryCount,
+    elapsedMs: Date.now() - GS.t0,
+    savedAt: new Date().toISOString()
+  };
+  await patchProfile({ currentSession: cs });
 }
 
-function renderQ(){
-  const q=GS.questions[GS.qi],total=GS.questions.length;
-  GS.answered=false;
-  const retryTag=q._retry?' <span style="color:var(--amber);font-size:10px;font-weight:700;background:var(--amber-l);padding:1px 6px;border-radius:4px;border:1px solid #E8C97A">REPASO</span>':'';
-  document.getElementById('q-num').innerHTML=`Pregunta ${GS.qi+1} de ${total}${retryTag}`;
-  document.getElementById('g-prog').style.width=Math.round(GS.qi/total*100)+'%';
-  document.getElementById('q-fb').style.display='none';
-  document.getElementById('next-btn').style.display='none';
+function renderQ() {
+  const q = GS.questions[GS.qi], total = GS.questions.length;
+  GS.answered = false;
+  const retryTag = q._retry
+    ? ' <span style="color:var(--amber);font-size:10px;font-weight:700;background:var(--amber-l);padding:1px 6px;border-radius:4px;border:1px solid #E8C97A">REPASO</span>'
+    : '';
+  document.getElementById('q-num').innerHTML = `Pregunta ${GS.qi+1} de ${total}${retryTag}`;
+  document.getElementById('g-prog').style.width = Math.round(GS.qi/total*100) + '%';
+  document.getElementById('q-fb').style.display = 'none';
+  document.getElementById('next-btn').style.display = 'none';
 
-  let body='';
-  if(q.type==='count'){
-    body=`<div class="q-text">${q.q}</div><div class="q-count-area">${q.pic.join(' ')}</div>`;
-  }else if(q.type==='calc'){
-    body=`<div class="q-big">${q.q}</div>`;
-  }else{
-    body=`<div class="q-text">${q.q}</div>`;
-    if(q.hint)body+=`<div class="q-hint">${q.hint}</div>`;
+  let body = '';
+  if (q.type === 'count') {
+    body = `<div class="q-text">${q.q}</div><div class="q-count-area">${q.pic.join(' ')}</div>`;
+  } else if (q.type === 'calc') {
+    body = `<div class="q-big">${q.q}</div>`;
+  } else {
+    body = `<div class="q-text">${q.q}</div>`;
+    if (q.hint) body += `<div class="q-hint">${q.hint}</div>`;
   }
-  document.getElementById('q-body').innerHTML=body;
+  document.getElementById('q-body').innerHTML = body;
 
-  const el=document.getElementById('q-opts');el.innerHTML='';
-  q.opts.forEach(o=>{
-    const b=document.createElement('button');b.className='opt';b.textContent=String(o);
-    b.onclick=()=>checkAns(b,String(o),String(q.answer));
+  const el = document.getElementById('q-opts'); el.innerHTML = '';
+  q.opts.forEach(o => {
+    const b = document.createElement('button'); b.className = 'opt'; b.textContent = String(o);
+    b.onclick = () => checkAns(b, String(o), String(q.answer));
     el.appendChild(b);
   });
 }
 
-function checkAns(btn,chosen,correct){
-  if(GS.answered)return;GS.answered=true;
+function checkAns(btn, chosen, correct) {
+  if (GS.answered) return;
+  GS.answered = true;
   GS.totalAnswered++;
-  document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===correct)b.className='opt correct';});
-  const fb=document.getElementById('q-fb');
-  if(chosen===correct){
-    GS.correct++;btn.className='opt correct';
-    fb.innerHTML='<div class="feedback-row ok">✓ Correcto</div>';
-  }else{
-    GS.errors++;btn.className='opt wrong';
-    // Re-queue the failed question at the end with reshuffled options
-    const failedQ=GS.questions[GS.qi];
-    const requeuedQ=Object.assign({},failedQ,{opts:sh(failedQ.opts),_retry:true});
-    GS.questions.push(requeuedQ);
+  document.querySelectorAll('.opt').forEach(b => { b.disabled = true; if (b.textContent === correct) b.className = 'opt correct'; });
+  const fb = document.getElementById('q-fb');
+  if (chosen === correct) {
+    GS.correct++; btn.className = 'opt correct';
+    fb.innerHTML = '<div class="feedback-row ok">✓ Correcto</div>';
+  } else {
+    GS.errors++; btn.className = 'opt wrong';
+    // Re-queue failed question at the end with reshuffled options
+    const fq = GS.questions[GS.qi];
+    GS.questions.push(Object.assign({}, fq, { opts: sh(fq.opts), _retry: true }));
     GS.retryCount++;
-    fb.innerHTML=`<div class="feedback-row fail">✗ Incorrecto — respuesta: <strong>${correct}</strong> · Volverá al final</div>`;
+    // Store failed question in profile so it appears in NEXT session too
+    const key = `${GS.subj}-${GS.lvl}`;
+    D.failedQuestions = D.failedQuestions || {};
+    D.failedQuestions[key] = D.failedQuestions[key] || [];
+    // avoid duplicates by question text
+    if (!D.failedQuestions[key].some(q => q.q === fq.q)) {
+      D.failedQuestions[key].push(fq);
+    }
+    fb.innerHTML = `<div class="feedback-row fail">✗ Incorrecto — respuesta: <strong>${correct}</strong> · Volverá al final</div>`;
   }
-  fb.style.display='block';
-  const nb=document.getElementById('next-btn');nb.style.display='block';
-  nb.textContent=GS.qi<GS.questions.length-1?'Siguiente':'Ver resultado';
+  fb.style.display = 'block';
+  const nb = document.getElementById('next-btn'); nb.style.display = 'block';
+  nb.textContent = GS.qi < GS.questions.length-1 ? 'Siguiente' : 'Ver resultado';
 }
 
-function nextQ(){
-  if(GS.qi<GS.questions.length-1){GS.qi++;renderQ();}
+window.nextQ = function() {
+  if (GS.qi < GS.questions.length-1) { GS.qi++; renderQ(); }
   else finishSession();
-}
+};
 
-function confirmExit(){
-  if(confirm('¿Salir? El progreso de esta sesión no se guardará.')){clearInterval(_timer);goHome();}
-}
+window.confirmExit = async function() {
+  if (confirm('¿Salir? Se guardará tu progreso hasta aquí.')) {
+    clearInterval(_timer);
+    await saveCurrentSession();
+    goHome();
+  }
+};
 
 // ── RESULTS ───────────────────────────────────────────────────
-let _rAction='home';
+let _rAction = 'home';
 
-function finishSession(){
+async function finishSession() {
   clearInterval(_timer);
-  const timeMs=Date.now()-GS.t0;
-  // base total = original 20 questions (retries excluded from accuracy calc)
-  const total=GS.totalAnswered;
-  const correct=GS.correct,errors=GS.errors;
-  const acc=correct/total,errRate=errors/total;
-  const passed=acc>=PASS_ACC;
-  const avgSec=(timeMs/total/1000).toFixed(1);
+  const timeMs = Date.now() - GS.t0;
+  const total   = GS.totalAnswered;
+  const correct = GS.correct, errors = GS.errors;
+  const acc = correct / total, errRate = errors / total;
+  const passed = acc >= PASS_ACC;
+  const avgSec = (timeMs / total / 1000).toFixed(1);
 
-  D.history=D.history||[];
-  D.history.push({date:todayStr(),subject:GS.subj,level:GS.lvl,correct,total,timeMs,passed});
-
-  if(passed){
-    const maxLvl=LN[GS.subj].length-1;
-    if(GS.lvl<maxLvl)D.levels[GS.subj]=GS.lvl+1;
-    D.attempts[GS.subj]=0;
-    D.todayDone=true;D.lastDoneDate=todayStr();
-    _rAction='next';
-  }else{
-    D.attempts[GS.subj]=(D.attempts[GS.subj]||0)+1;
-    _rAction='repeat';
-  }
-  save();
-
-  const accPct=Math.round(acc*100);
-  document.getElementById('r-icon').textContent=passed?'✓':'✗';
-  document.getElementById('r-icon').style.color=passed?'var(--green)':'var(--red)';
-  document.getElementById('r-title').textContent=passed?'Nivel superado':'Repetir nivel';
-  document.getElementById('r-sub').textContent=`${accPct}% de precisión · ${fmtMs(timeMs)}`;
-  document.getElementById('r-cor').textContent=correct;
-  document.getElementById('r-err').textContent=errors;
-  document.getElementById('r-time').textContent=fmtMs(timeMs);
-  document.getElementById('r-spd').textContent=avgSec+'s';
-  document.getElementById('rs-cor').className=acc>=0.9?'res-stat good':acc>=0.8?'res-stat warn':'res-stat bad';
-  document.getElementById('rs-err').className=errRate===0?'res-stat good':errRate<=ERR_REPEAT?'res-stat warn':'res-stat bad';
-  document.getElementById('rs-spd').className=parseFloat(avgSec)<12?'res-stat good':'res-stat warn';
-
-  const vd=document.getElementById('r-verdict');
-  if(passed){
-    vd.className='verdict pass';
-    document.getElementById('rv-title').textContent='Dominio alcanzado — nivel superado';
-    const nxt=Math.min(GS.lvl+1,LN[GS.subj].length-1);
-    document.getElementById('rv-sub').textContent=`Próximo: Nivel ${nxt+1} — ${LN[GS.subj][nxt]}`;
-  }else{
-    vd.className='verdict repeat';
-    document.getElementById('rv-title').textContent=errRate>ERR_REPEAT?`${Math.round(errRate*100)}% de errores — nivel bloqueado`:`Precisión ${accPct}% — se requiere ${Math.round(PASS_ACC*100)}%`;
-    document.getElementById('rv-sub').textContent=`Intento ${D.attempts[GS.subj]} · Se requiere 80% para avanzar`;
+  // Clear failed questions for this level if passed
+  const key = `${GS.subj}-${GS.lvl}`;
+  if (passed) {
+    D.failedQuestions = D.failedQuestions || {};
+    delete D.failedQuestions[key];
   }
 
-  const ab=document.getElementById('r-act-btn');
-  if(passed){ab.textContent='Siguiente nivel →';ab.className='btn success';}
-  else{ab.textContent='Repetir nivel ↺';ab.className='btn danger';}
+  // Save to history (keep last 60)
+  D.history = D.history || [];
+  D.history.push({ date: todayStr(), subject: GS.subj, level: GS.lvl, correct, total, timeMs, passed });
+  if (D.history.length > 60) D.history = D.history.slice(-60);
+
+  // Advance or repeat
+  if (passed) {
+    const maxLvl = LN[GS.subj].length - 1;
+    if (GS.lvl < maxLvl) D.levels[GS.subj] = GS.lvl + 1;
+    D.attempts[GS.subj] = 0;
+    D.todayDone = true;
+    D.lastDoneDate = todayStr();
+    _rAction = 'next';
+  } else {
+    D.attempts[GS.subj] = (D.attempts[GS.subj] || 0) + 1;
+    _rAction = 'repeat';
+  }
+
+  // Clear current session — it's done
+  D.currentSession = null;
+  await saveProfile();
+
+  // Render results
+  const accPct = Math.round(acc * 100);
+  document.getElementById('r-icon').textContent = passed ? '✓' : '✗';
+  document.getElementById('r-icon').style.color = passed ? 'var(--green)' : 'var(--red)';
+  document.getElementById('r-title').textContent = passed ? 'Nivel superado' : 'Repetir nivel';
+  document.getElementById('r-sub').textContent = `${accPct}% de precisión · ${fmtMs(timeMs)}`;
+  document.getElementById('r-cor').textContent = correct;
+  document.getElementById('r-err').textContent = errors;
+  document.getElementById('r-time').textContent = fmtMs(timeMs);
+  document.getElementById('r-spd').textContent = avgSec + 's';
+  document.getElementById('rs-cor').className = acc>=0.9?'res-stat good':acc>=0.8?'res-stat warn':'res-stat bad';
+  document.getElementById('rs-err').className = errRate===0?'res-stat good':errRate<=ERR_REPEAT?'res-stat warn':'res-stat bad';
+  document.getElementById('rs-spd').className = parseFloat(avgSec)<12?'res-stat good':'res-stat warn';
+
+  const vd = document.getElementById('r-verdict');
+  if (passed) {
+    vd.className = 'verdict pass';
+    document.getElementById('rv-title').textContent = 'Dominio alcanzado — nivel superado';
+    const nxt = Math.min(GS.lvl+1, LN[GS.subj].length-1);
+    document.getElementById('rv-sub').textContent = `Próximo: Nivel ${nxt+1} — ${LN[GS.subj][nxt]}`;
+  } else {
+    vd.className = 'verdict repeat';
+    document.getElementById('rv-title').textContent = errRate > ERR_REPEAT
+      ? `${Math.round(errRate*100)}% de errores — nivel bloqueado`
+      : `Precisión ${accPct}% — se requiere ${Math.round(PASS_ACC*100)}%`;
+    document.getElementById('rv-sub').textContent = `Intento ${D.attempts[GS.subj]} · Se requiere 80% para avanzar`;
+  }
+
+  const ab = document.getElementById('r-act-btn');
+  if (passed) { ab.textContent = 'Siguiente nivel →'; ab.className = 'btn success'; }
+  else        { ab.textContent = 'Repetir nivel ↺';  ab.className = 'btn danger';  }
   show('results');
 }
 
-function doResultAction(){startSession(GS.subj);}
+window.doResultAction = function() { window.startSession(GS.subj); };
 
-(function(){
-  if(!D.name){show('setup');return;}
-  checkNewDay();goHome();
-})();
+// ── EVENT LISTENERS ──────────────────────────────────────────
+function addClick(id, fn) {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('click', fn);
+}
+
+addClick('btn-google',         () => window.signInGoogle());
+addClick('btn-save-setup',     () => window.saveSetup());
+addClick('btn-go-home-results',() => window.goHome());
+addClick('btn-go-home-history',() => window.goHome());
+addClick('btn-history',        () => window.showHistory());
+addClick('btn-change-subj',    () => window.changeSubject());
+addClick('btn-signout',        () => window.signOut());
+addClick('btn-exit',           () => window.confirmExit());
+// next-btn listener added directly
+document.getElementById('next-btn').addEventListener('click', () => window.nextQ());
+addClick('btn-result-action',  () => window.doResultAction());
+
+// subj-opt picker (delegated)
+document.querySelectorAll('.subj-opt').forEach(el => {
+  el.addEventListener('click', () => {
+    document.querySelectorAll('.subj-opt').forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+    _subj = el.dataset.subj;
+  });
+});
+
+// subj-area button (dynamically created — use event delegation)
+document.getElementById('subj-area').addEventListener('click', e => {
+  const btn = e.target.closest('#btn-start-subj');
+  if (btn) window.startSession(D.subject);
+});
+
 </script>
 </body>
 </html>
