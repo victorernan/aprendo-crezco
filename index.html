@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprendo y Crezco</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F7F7F5;--card:#FFFFFF;--text:#1C1C1C;--muted:#888;--border:#E2E2DE;
+  --green:#2D9B6F;--green-l:#EAF7F1;
+  --red:#C0392B;--red-l:#FDEDEC;
+  --blue:#2471A3;--blue-l:#EBF5FB;
+  --amber:#B7770D;--amber-l:#FEF9E7;
+  --radius:10px;
+}
+html,body{min-height:100vh;background:var(--bg);font-family:'Nunito',sans-serif;color:var(--text);font-size:16px}
+#root{max-width:460px;margin:0 auto;padding:20px 16px 48px}
+.screen{display:none}.screen.active{display:block}
+h2{font-size:18px;font-weight:800}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+.setup-title{font-size:26px;font-weight:800;margin:32px 0 6px;text-align:center}
+.setup-sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:24px}
+.field-label{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:6px;display:block}
+.text-input{width:100%;padding:12px 14px;font-size:18px;font-weight:700;border:1.5px solid var(--border);border-radius:var(--radius);font-family:'Nunito',sans-serif;outline:none;background:var(--card)}
+.text-input:focus{border-color:var(--blue)}
+.subj-pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 24px}
+.subj-opt{padding:16px 12px;border:2px solid var(--border);border-radius:var(--radius);text-align:center;cursor:pointer;background:var(--card);transition:all .12s}
+.subj-opt:hover{border-color:#AAA}
+.subj-opt.selected{border-color:var(--blue);background:var(--blue-l)}
+.subj-opt .so-icon{font-size:28px;display:block;margin-bottom:4px}
+.subj-opt .so-name{font-size:14px;font-weight:800;display:block}
+.subj-opt .so-desc{font-size:11px;color:var(--muted);margin-top:2px}
+.btn{width:100%;padding:13px;border:none;border-radius:var(--radius);font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;cursor:pointer;transition:opacity .12s}
+.btn:hover{opacity:.88}
+.btn.primary{background:var(--text);color:#FFF}
+.btn.secondary{background:var(--bg);border:1.5px solid var(--border);color:var(--text)}
+.btn.success{background:var(--green);color:#FFF}
+.btn.danger{background:var(--red);color:#FFF}
+.btn+.btn{margin-top:8px}
+.home-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.home-name{font-size:20px;font-weight:800}
+.home-date{font-size:12px;color:var(--muted);margin-top:2px}
+.streak-pill{background:var(--amber-l);border:1px solid #E8C97A;border-radius:20px;padding:5px 12px;font-size:13px;font-weight:700;color:var(--amber)}
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 10px;text-align:center}
+.stat .n{font-size:24px;font-weight:800;line-height:1}
+.stat .l{font-size:11px;color:var(--muted);font-weight:600;margin-top:3px}
+.day-bar{display:flex;gap:5px;justify-content:center;margin:12px 0 4px}
+.day-dot{width:32px;height:8px;border-radius:4px;background:var(--border)}
+.day-dot.done{background:var(--green)}
+.day-dot.today-done{background:var(--green)}
+.day-dot.today-pending{background:var(--amber)}
+.day-labels{display:flex;gap:5px;justify-content:center;margin-bottom:14px}
+.day-labels span{width:32px;text-align:center;font-size:10px;color:var(--muted);font-weight:600}
+.session-banner{border-radius:var(--radius);padding:12px 14px;margin-bottom:14px;border:1px solid}
+.session-banner.pending{background:var(--amber-l);border-color:#E8C97A}
+.session-banner.done{background:var(--green-l);border-color:#A8D5C2}
+.sb-title{font-size:14px;font-weight:800}
+.sb-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.subj-btn{width:100%;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.subj-btn:hover{border-color:#AAA}
+.sb-left{display:flex;align-items:center;gap:12px}
+.sb-name{font-size:15px;font-weight:800;display:block}
+.sb-level{font-size:12px;color:var(--muted);margin-top:1px}
+.sb-arrow{font-size:18px;color:var(--muted)}
+.lvl-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:6px;width:130px}
+.lvl-fill{height:100%;border-radius:2px;background:var(--blue)}
+.game-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.icon-btn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:var(--card);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.game-meta{flex:1}
+.game-subj{font-size:15px;font-weight:800}
+.game-lvl{font-size:11px;color:var(--muted);margin-top:1px}
+.game-timer{font-size:13px;font-weight:700;color:var(--muted);background:var(--bg);border-radius:6px;padding:3px 8px;border:1px solid var(--border)}
+.progress-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.progress-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .3s}
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 18px;margin-bottom:12px}
+.q-num{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:10px}
+.q-text{font-size:18px;font-weight:800;line-height:1.4;margin-bottom:6px}
+.q-hint{font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.5;background:var(--bg);padding:8px 10px;border-radius:6px}
+.q-big{font-size:42px;font-weight:800;text-align:center;letter-spacing:2px;margin:10px 0 16px}
+.q-count-area{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin:10px 0 16px;font-size:28px;line-height:1.5}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{padding:13px 8px;border:1.5px solid var(--border);border-radius:8px;background:var(--card);font-size:18px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;color:var(--text);transition:border-color .1s,background .1s}
+.opt:hover:not(:disabled){border-color:#AAA;background:var(--bg)}
+.opt.correct{background:var(--green-l);border-color:var(--green);color:var(--green)}
+.opt.wrong{background:var(--red-l);border-color:var(--red);color:var(--red)}
+.opt:disabled{cursor:default}
+.feedback-row{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:8px;margin-top:10px;font-size:14px;font-weight:700}
+.feedback-row.ok{background:var(--green-l);color:var(--green)}
+.feedback-row.fail{background:var(--red-l);color:var(--red)}
+.results-header{text-align:center;padding:10px 0 20px}
+.results-header .big-icon{font-size:44px;margin-bottom:8px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0}
+.res-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 10px;text-align:center}
+.res-stat .n{font-size:28px;font-weight:800}
+.res-stat .l{font-size:11px;color:var(--muted);font-weight:600;margin-top:2px}
+.res-stat.good .n{color:var(--green)}
+.res-stat.warn .n{color:var(--amber)}
+.res-stat.bad  .n{color:var(--red)}
+.verdict{border-radius:var(--radius);padding:12px 14px;margin:12px 0;border:1px solid}
+.verdict.pass{background:var(--green-l);border-color:#A8D5C2}
+.verdict.repeat{background:var(--amber-l);border-color:#E8C97A}
+.verdict .v-title{font-size:14px;font-weight:800}
+.verdict .v-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.history-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}
+.history-row:last-child{border-bottom:none}
+.hr-date{color:var(--muted);font-size:12px;margin-top:2px}
+.hr-stats{display:flex;gap:12px;font-weight:700}
+.hr-acc-good{color:var(--green)}.hr-acc-bad{color:var(--red)}.hr-time{color:var(--blue)}
+</style>
+</head>
+<body>
+<div id="root">
+
+<div id="screen-setup" class="screen active">
+  <div class="setup-title">Aprendo y Crezco</div>
+  <p class="setup-sub">Configura tu perfil de aprendizaje</p>
+  <div class="card">
+    <label class="field-label">Nombre</label>
+    <input class="text-input" id="setup-name" type="text" placeholder="Nombre de la estudiante" maxlength="24"/>
+    <div style="margin-top:20px">
+      <label class="field-label">Materia</label>
+      <div class="subj-pick">
+        <div class="subj-opt selected" data-subj="math" onclick="pickSubj(this)">
+          <span class="so-icon">🔢</span>
+          <span class="so-name">Matemáticas</span>
+          <span class="so-desc">Cálculo y números</span>
+        </div>
+        <div class="subj-opt" data-subj="read" onclick="pickSubj(this)">
+          <span class="so-icon">📖</span>
+          <span class="so-name">Lectura</span>
+          <span class="so-desc">Comprensión y vocabulario</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn primary" onclick="saveSetup()">Comenzar</button>
+  </div>
+</div>
+
+<div id="screen-home" class="screen">
+  <div class="home-header">
+    <div>
+      <div class="home-name" id="h-name">Hola</div>
+      <div class="home-date" id="h-date"></div>
+    </div>
+    <div class="streak-pill" id="h-streak">0 días</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat"><div class="n" id="h-sessions">0</div><div class="l">Sesiones</div></div>
+    <div class="stat"><div class="n" id="h-acc">—</div><div class="l">Precisión</div></div>
+    <div class="stat"><div class="n" id="h-spd">—</div><div class="l">Seg / preg.</div></div>
+  </div>
+  <div class="day-bar" id="day-bar"></div>
+  <div class="day-labels" id="day-labels"></div>
+  <div class="session-banner pending" id="h-banner">
+    <div class="sb-title" id="h-banner-title">Sesión pendiente</div>
+    <div class="sb-sub" id="h-banner-sub">Completa tu práctica de hoy</div>
+  </div>
+  <div id="subj-area"></div>
+  <button class="btn secondary" style="margin-top:6px;font-size:13px" onclick="showHistory()">Ver historial</button>
+  <button class="btn secondary" style="margin-top:6px;font-size:12px;color:var(--muted)" onclick="changeSubject()">Cambiar materia</button>
+</div>
+
+<div id="screen-game" class="screen">
+  <div class="game-header">
+    <button class="icon-btn" onclick="confirmExit()">←</button>
+    <div class="game-meta">
+      <div class="game-subj" id="g-subj"></div>
+      <div class="game-lvl" id="g-lvl"></div>
+    </div>
+    <div class="game-timer" id="g-timer">0:00</div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="g-prog" style="width:0%"></div></div>
+  <div class="q-card">
+    <div class="q-num" id="q-num"></div>
+    <div id="q-body"></div>
+    <div class="opts" id="q-opts"></div>
+    <div id="q-fb" style="display:none"></div>
+  </div>
+  <button class="btn primary" id="next-btn" onclick="nextQ()" style="display:none">Siguiente</button>
+</div>
+
+<div id="screen-results" class="screen">
+  <div class="results-header">
+    <div class="big-icon" id="r-icon"></div>
+    <h2 id="r-title"></h2>
+    <p id="r-sub" style="color:var(--muted);font-size:14px;margin-top:4px"></p>
+  </div>
+  <div class="result-grid">
+    <div class="res-stat" id="rs-cor"><div class="n" id="r-cor">—</div><div class="l">Correctas</div></div>
+    <div class="res-stat" id="rs-err"><div class="n" id="r-err">—</div><div class="l">Errores</div></div>
+    <div class="res-stat"><div class="n" id="r-time">—</div><div class="l">Tiempo total</div></div>
+    <div class="res-stat" id="rs-spd"><div class="n" id="r-spd">—</div><div class="l">Seg / pregunta</div></div>
+  </div>
+  <div class="verdict" id="r-verdict">
+    <div class="v-title" id="rv-title"></div>
+    <div class="v-sub" id="rv-sub"></div>
+  </div>
+  <button class="btn" id="r-act-btn" onclick="doResultAction()"></button>
+  <button class="btn secondary" style="margin-top:8px" onclick="goHome()">Volver al inicio</button>
+</div>
+
+<div id="screen-history" class="screen">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px">
+    <button class="icon-btn" onclick="goHome()">←</button>
+    <h2>Historial</h2>
+  </div>
+  <div class="card" id="hist-list"></div>
+</div>
+
+</div>
+<script>
+const SAVE_KEY='aycv3';
+const PASS_ACC=0.80;
+const ERR_REPEAT=0.20;
+
+function blankData(){
+  return{name:'',subject:'math',streak:0,lastDoneDate:null,
+    todayDone:false,lastOpenDate:null,history:[],
+    levels:{math:0,read:0},attempts:{math:0,read:0}};
+}
+let D=function(){try{return JSON.parse(localStorage.getItem(SAVE_KEY))||blankData();}catch(e){return blankData();}}();
+function save(){localStorage.setItem(SAVE_KEY,JSON.stringify(D));}
+
+function todayStr(){return new Date().toISOString().slice(0,10);}
+function fmtDate(ds){
+  const dn=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],mn=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const d=new Date(ds+'T12:00:00');return`${dn[d.getDay()]} ${d.getDate()} ${mn[d.getMonth()]}`;
+}
+function fmtMs(ms){const s=Math.round(ms/1000);return s<60?`${s}s`:`${Math.floor(s/60)}m ${s%60}s`;}
+function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function sh(a){return[...a].sort(()=>Math.random()-.5);}
+function wrongSet(correct,count,min,max){
+  const s=new Set();
+  let attempts=0;
+  while(s.size<count&&attempts<200){
+    const w=rnd(min,max);
+    if(w!==correct)s.add(w);
+    attempts++;
+  }
+  // fallback if range too narrow
+  let extra=min;
+  while(s.size<count){if(extra!==correct)s.add(extra);extra++;}
+  return[...s];
+}
+
+function checkNewDay(){
+  const today=todayStr();
+  if(D.lastOpenDate!==today){
+    if(D.lastOpenDate){
+      const diff=Math.round((new Date(today+'T12:00:00')-new Date(D.lastOpenDate+'T12:00:00'))/86400000);
+      if(diff===1&&D.todayDone)D.streak=(D.streak||0)+1;
+      else if(diff>1)D.streak=0;
+    }else D.streak=0;
+    D.todayDone=false;D.lastOpenDate=today;save();
+  }
+}
+
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active');}
+function goHome(){updateHome();show('home');}
+
+let _subj='math';
+function pickSubj(el){document.querySelectorAll('.subj-opt').forEach(e=>e.classList.remove('selected'));el.classList.add('selected');_subj=el.dataset.subj;}
+function saveSetup(){
+  const n=document.getElementById('setup-name').value.trim();
+  if(!n){alert('Escribe el nombre');return;}
+  D.name=n;D.subject=_subj;save();checkNewDay();goHome();
+}
+document.getElementById('setup-name').addEventListener('keydown',e=>{if(e.key==='Enter')saveSetup();});
+function changeSubject(){
+  document.getElementById('setup-name').value=D.name;
+  const other=D.subject==='math'?'read':'math';
+  _subj=other;
+  document.querySelectorAll('.subj-opt').forEach(e=>e.classList.toggle('selected',e.dataset.subj===other));
+  show('setup');
+}
+
+// ── LEVEL NAMES ───────────────────────────────────────────────
+const LN={
+  math:[
+    'Números hasta 100',
+    'Decenas y unidades',
+    'Comparar números',
+    'Sumas sin llevar',
+    'Sumas con llevada',
+    'Restas sin llevar',
+    'Restas con préstamo',
+    'Tablas del 2 y del 5',
+    'Tabla del 10',
+    'División básica',
+    'Longitud y peso',
+    'Tiempo y dinero',
+    'Problemas con sumas',
+    'Problemas con restas',
+    'Figuras geométricas',
+    'Secuencias y patrones'
+  ],
+  read:['Vocales','Sílabas','Palabras','Completar frases','Comprensión','Sinónimos','Antónimos','Identificar sílabas','Lectura y preguntas','Vocabulario']
+};
+const SL={math:'Matemáticas',read:'Lectura'};
+
+// ── HOME ─────────────────────────────────────────────────────
+function updateHome(){
+  checkNewDay();
+  const today=todayStr(),hist=D.history||[];
+  document.getElementById('h-name').textContent=D.name;
+  document.getElementById('h-date').textContent=fmtDate(today);
+  document.getElementById('h-streak').textContent=`${D.streak} día${D.streak!==1?'s':''} seguidos`;
+  document.getElementById('h-sessions').textContent=hist.length;
+  if(hist.length){
+    const avgA=Math.round(hist.reduce((a,h)=>a+h.correct/h.total,0)/hist.length*100);
+    const avgS=(hist.reduce((a,h)=>a+h.timeMs/h.total,0)/hist.length/1000).toFixed(1);
+    document.getElementById('h-acc').textContent=avgA+'%';
+    document.getElementById('h-spd').textContent=avgS+'s';
+  }else{document.getElementById('h-acc').textContent='—';document.getElementById('h-spd').textContent='—';}
+
+  const bar=document.getElementById('day-bar'),lbl=document.getElementById('day-labels');
+  bar.innerHTML='';lbl.innerHTML='';
+  const sd=['D','L','M','X','J','V','S'];
+  for(let i=6;i>=0;i--){
+    const d=new Date();d.setDate(d.getDate()-i);const ds=d.toISOString().slice(0,10);
+    const isToday=(ds===today),done=isToday?D.todayDone:hist.some(h=>h.date===ds&&h.passed);
+    const dot=document.createElement('div');
+    dot.className='day-dot'+(isToday?(D.todayDone?' today-done':' today-pending'):(done?' done':''));
+    bar.appendChild(dot);
+    const sp=document.createElement('span');sp.textContent=sd[d.getDay()];lbl.appendChild(sp);
+  }
+
+  const bn=document.getElementById('h-banner');
+  if(D.todayDone){
+    bn.className='session-banner done';
+    document.getElementById('h-banner-title').textContent='Sesión de hoy completada';
+    document.getElementById('h-banner-sub').textContent=`Racha: ${D.streak} día${D.streak!==1?'s':''}`;
+  }else{
+    bn.className='session-banner pending';
+    document.getElementById('h-banner-title').textContent='Sesión pendiente';
+    document.getElementById('h-banner-sub').textContent='Completa tu práctica de hoy para mantener la racha';
+  }
+
+  const s=D.subject,lvl=D.levels[s]||0,names=LN[s],att=D.attempts[s]||0;
+  const pct=Math.round(lvl/names.length*100);
+  document.getElementById('subj-area').innerHTML=`
+    <button class="subj-btn" onclick="startSession('${s}')">
+      <div class="sb-left">
+        <div style="font-size:26px">${s==='math'?'🔢':'📖'}</div>
+        <div>
+          <span class="sb-name">${SL[s]}</span>
+          <span class="sb-level">Nivel ${lvl+1} — ${names[Math.min(lvl,names.length-1)]}${att>0?' · Intento '+att:''}</span>
+          <div class="lvl-bar"><div class="lvl-fill" style="width:${pct}%"></div></div>
+        </div>
+      </div>
+      <span class="sb-arrow">›</span>
+    </button>`;
+}
+
+function showHistory(){
+  const hist=[...(D.history||[])].reverse();
+  const el=document.getElementById('hist-list');
+  el.innerHTML=hist.length?hist.map(h=>{
+    const acc=Math.round(h.correct/h.total*100),cls=acc>=80?'hr-acc-good':'hr-acc-bad';
+    return`<div class="history-row">
+      <div><div style="font-weight:700">${SL[h.subject]} — Nv.${h.level+1}${h.passed?' ✓':' ✗'}</div><div class="hr-date">${fmtDate(h.date)}</div></div>
+      <div class="hr-stats"><span class="${cls}">${acc}%</span><span class="hr-time">${fmtMs(h.timeMs)}</span></div>
+    </div>`;
+  }).join(''):'<p style="text-align:center;padding:20px;color:var(--muted)">Sin sesiones aún</p>';
+  show('history');
+}
+
+// ── QUESTION GENERATORS ───────────────────────────────────────
+function genLevel(subj,lvl){
+  const g={
+    math:[
+      qNumbers,      // 0 — Números hasta 100
+      qPlaceValue,   // 1 — Decenas y unidades
+      qCompare,      // 2 — Comparar números
+      qAddSimple,    // 3 — Sumas sin llevar
+      qAddCarry,     // 4 — Sumas con llevada
+      qSubSimple,    // 5 — Restas sin llevar
+      qSubBorrow,    // 6 — Restas con préstamo
+      qMult25,       // 7 — Tablas del 2 y del 5
+      qMult10,       // 8 — Tabla del 10
+      qDiv,          // 9 — División básica
+      qMeasure,      // 10 — Longitud y peso
+      qTimeMoney,    // 11 — Tiempo y dinero
+      qProblemAdd,   // 12 — Problemas con sumas
+      qProblemSub,   // 13 — Problemas con restas
+      qGeometry,     // 14 — Figuras geométricas
+      qPatterns      // 15 — Secuencias y patrones
+    ],
+    read:[qVowels,qSyllables,qWords,qComplete,qComp,qSynonyms,qAntonyms,qSylId,qReadQ,qVocab]
+  };
+  return g[subj][Math.min(lvl,g[subj].length-1)]();
+}
+
+// ── MATH GENERATORS ──────────────────────────────────────────
+
+// 0 · Leer y escribir números hasta 100
+function qNumbers(){
+  return Array.from({length:20},()=>{
+    const n=rnd(10,100);
+    const type=rnd(0,1);
+    if(type===0){
+      // ¿Qué número es?
+      return{type:'text',q:`¿Qué número es ${n}?`,answer:String(n),opts:sh([String(n),...wrongSet(n,3,Math.max(10,n-10),Math.min(100,n+10)).map(String)])};
+    }else{
+      // Número anterior / siguiente
+      const which=rnd(0,1);
+      const ans=which===0?n-1:n+1;
+      const q=which===0?`¿Qué número va antes de ${n}?`:`¿Qué número va después de ${n}?`;
+      return{type:'text',q,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(1,ans-5),Math.min(100,ans+5)).map(String)])};
+    }
+  });
+}
+
+// 1 · Decenas y unidades
+function qPlaceValue(){
+  return Array.from({length:20},()=>{
+    const dec=rnd(1,9),uni=rnd(0,9),n=dec*10+uni;
+    const type=rnd(0,2);
+    if(type===0){
+      return{type:'text',q:`${n} = ___ decenas + ___ unidades`,answer:`${dec} dec + ${uni} uni`,opts:sh([`${dec} dec + ${uni} uni`,`${uni} dec + ${dec} uni`,`${dec+1} dec + ${uni} uni`,`${dec} dec + ${uni+1} uni`])};
+    }else if(type===1){
+      return{type:'text',q:`¿Cuántas decenas tiene ${n}?`,answer:String(dec),opts:sh([String(dec),...wrongSet(dec,3,1,9).map(String)])};
+    }else{
+      return{type:'text',q:`¿Cuántas unidades tiene ${n}?`,answer:String(uni),opts:sh([String(uni),...wrongSet(uni,3,0,9).map(String)])};
+    }
+  });
+}
+
+// 2 · Comparar números
+function qCompare(){
+  const sy=['<','>','='];
+  return Array.from({length:20},()=>{
+    // Mix: some equal, mostly different, range up to 100
+    const a=rnd(1,99),b=rnd(0,1)===0?a:rnd(1,99);
+    const ans=a>b?'>':a<b?'<':'=';
+    return{type:'text',q:`${a}   ___   ${b}`,hint:'Elige el símbolo: < = >',answer:ans,opts:sy};
+  });
+}
+
+// 3 · Sumas sin llevar (result < 100, no carrying needed)
+function qAddSimple(){
+  return Array.from({length:20},()=>{
+    // Ensure no carrying: units digits sum < 10
+    let a,b;
+    do{a=rnd(10,60);b=rnd(10,30);}while((a%10)+(b%10)>=10||a+b>99);
+    const ans=a+b;
+    return{type:'calc',q:`${a} + ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(10,ans-9),Math.min(99,ans+9))])};
+  });
+}
+
+// 4 · Sumas con llevada
+function qAddCarry(){
+  return Array.from({length:20},()=>{
+    // Ensure carrying: units digits sum >= 10
+    let a,b;
+    do{a=rnd(5,49);b=rnd(5,49);}while((a%10)+(b%10)<10||a+b>99);
+    const ans=a+b;
+    return{type:'calc',q:`${a} + ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(10,ans-9),Math.min(99,ans+9))])};
+  });
+}
+
+// 5 · Restas sin llevar
+function qSubSimple(){
+  return Array.from({length:20},()=>{
+    let a,b;
+    do{a=rnd(20,80);b=rnd(10,40);}while(a<=b||(a%10)<(b%10));
+    const ans=a-b;
+    return{type:'calc',q:`${a} − ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(0,ans-9),ans+9)])};
+  });
+}
+
+// 6 · Restas con préstamo
+function qSubBorrow(){
+  return Array.from({length:20},()=>{
+    let a,b;
+    do{a=rnd(20,80);b=rnd(5,40);}while(a<=b||(a%10)>=(b%10));
+    const ans=a-b;
+    return{type:'calc',q:`${a} − ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(0,ans-9),ans+9)])};
+  });
+}
+
+// 7 · Tablas del 2 y del 5
+function qMult25(){
+  return Array.from({length:20},(_,i)=>{
+    const base=i<10?2:5;
+    const b=rnd(1,10),ans=base*b;
+    return{type:'calc',q:`${base} × ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,Math.max(2,ans-8),ans+8)])};
+  });
+}
+
+// 8 · Tabla del 10
+function qMult10(){
+  return Array.from({length:20},()=>{
+    const b=rnd(1,10),ans=10*b;
+    const type=rnd(0,1);
+    if(type===0){
+      return{type:'calc',q:`10 × ${b} =`,answer:ans,opts:sh([ans,...wrongSet(ans,3,10,100)])};
+    }else{
+      // Conceptual: multiplicar es sumar varias veces
+      return{type:'text',q:`10 + 10 + 10 + 10 = 10 × ?`,answer:'4',opts:sh(['3','4','5','6'])};
+    }
+  });
+}
+
+// 9 · División básica — repartir en partes iguales
+function qDiv(){
+  const problems=[
+    {q:'10 dulces entre 2 niños. ¿Cuántos le toca a cada uno?',a:5,o:[3,4,5,6]},
+    {q:'12 manzanas entre 3 canastas. ¿Cuántas en cada canasta?',a:4,o:[3,4,5,6]},
+    {q:'20 fichas entre 4 grupos. ¿Cuántas por grupo?',a:5,o:[4,5,6,7]},
+    {q:'15 galletas entre 3 amigos. ¿Cuántas a cada uno?',a:5,o:[4,5,6,3]},
+    {q:'8 lápices entre 2 estuches. ¿Cuántos en cada uno?',a:4,o:[3,4,5,6]},
+    {q:'18 pelotas entre 3 cajas. ¿Cuántas en cada caja?',a:6,o:[5,6,7,4]},
+    {q:'16 cartas entre 4 jugadores. ¿Cuántas a cada uno?',a:4,o:[3,4,5,6]},
+    {q:'14 flores entre 2 jarrones. ¿Cuántas en cada jarrón?',a:7,o:[6,7,8,5]},
+  ];
+  return Array.from({length:20},(_,i)=>{
+    const p=problems[i%problems.length];
+    return{type:'text',q:p.q,answer:String(p.a),opts:sh(p.o.map(String))};
+  });
+}
+
+// 10 · Longitud y peso
+function qMeasure(){
+  const pool=[
+    {q:'¿Cuántos cm tiene 1 metro?',a:'100',o:['10','100','1000','50']},
+    {q:'Una regla mide 30 cm. ¿Cuántos mm son?',a:'300',o:['30','300','3000','3']},
+    {q:'¿Qué es más largo: 1 m o 90 cm?',a:'1 m',o:['90 cm','1 m','son iguales','no se puede saber']},
+    {q:'¿Cuántos kg pesa más: 3 kg o 2500 g?',a:'3 kg',o:['2500 g','3 kg','son iguales','no se sabe']},
+    {q:'Una niña mide 120 cm. ¿Cuánto es en metros?',a:'1,20 m',o:['1,20 m','12 m','0,12 m','120 m']},
+    {q:'¿Qué unidad usamos para medir una habitación?',a:'metros',o:['metros','kilómetros','gramos','litros']},
+    {q:'¿Qué unidad usamos para pesar una manzana?',a:'gramos',o:['gramos','kilómetros','litros','metros']},
+    {q:'2 kg + 500 g = ?',a:'2500 g',o:['2500 g','250 g','25000 g','2050 g']},
+    {q:'Un lápiz mide 15 cm y otro 8 cm. ¿Cuánto miden juntos?',a:'23 cm',o:['21 cm','22 cm','23 cm','24 cm']},
+    {q:'¿Qué instrumento usamos para medir longitud?',a:'regla',o:['regla','balanza','termómetro','reloj']},
+  ];
+  return Array.from({length:20},(_,i)=>{
+    const it=pool[i%pool.length];
+    return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};
+  });
+}
+
+// 11 · Tiempo y dinero
+function qTimeMoney(){
+  const pool=[
+    {q:'¿Cuántos minutos tiene 1 hora?',a:'60',o:['30','60','100','24']},
+    {q:'¿Cuántas horas tiene 1 día?',a:'24',o:['12','24','48','60']},
+    {q:'¿Cuántos días tiene 1 semana?',a:'7',o:['5','6','7','8']},
+    {q:'¿Cuántos meses tiene 1 año?',a:'12',o:['10','11','12','13']},
+    {q:'Son las 3:00. ¿Qué hora será en 2 horas?',a:'5:00',o:['4:00','5:00','6:00','3:20']},
+    {q:'Si entro al colegio a las 7:00 y salgo a las 12:00, ¿cuántas horas estoy?',a:'5 horas',o:['4 horas','5 horas','6 horas','7 horas']},
+    {q:'Tengo $500. Compro algo de $200. ¿Cuánto me queda?',a:'$300',o:['$200','$300','$400','$100']},
+    {q:'Un jugo vale $150 y una galleta $100. ¿Cuánto pago?',a:'$250',o:['$150','$200','$250','$300']},
+    {q:'¿Cuántos días hay en febrero (año normal)?',a:'28',o:['28','29','30','31']},
+    {q:'¿Qué día viene después del viernes?',a:'sábado',o:['jueves','viernes','sábado','domingo']},
+  ];
+  return Array.from({length:20},(_,i)=>{
+    const it=pool[i%pool.length];
+    return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};
+  });
+}
+
+// 12 · Problemas con sumas
+function qProblemAdd(){
+  return Array.from({length:20},()=>{
+    const a=rnd(5,40),b=rnd(5,40),ans=a+b;
+    const templates=[
+      `Tenía ${a} y me dieron ${b} más. ¿Cuántos tengo ahora?`,
+      `En la caja hay ${a} rojos y ${b} azules. ¿Cuántos hay en total?`,
+      `El lunes leí ${a} páginas y el martes ${b}. ¿Cuántas en total?`,
+      `Hay ${a} niñas y ${b} niños. ¿Cuántos estudiantes son?`,
+      `Un árbol tiene ${a} manzanas y otro ${b}. ¿Cuántas en total?`,
+    ];
+    const q=templates[rnd(0,templates.length-1)];
+    return{type:'text',q,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(5,ans-10),ans+10).map(String)])};
+  });
+}
+
+// 13 · Problemas con restas
+function qProblemSub(){
+  return Array.from({length:20},()=>{
+    const total=rnd(15,60),gasto=rnd(3,total-5),ans=total-gasto;
+    const templates=[
+      `Tenía ${total} y gasté ${gasto}. ¿Cuántos quedan?`,
+      `Había ${total} pájaros y volaron ${gasto}. ¿Cuántos quedan?`,
+      `Tenía ${total} fichas y perdí ${gasto}. ¿Cuántas me quedan?`,
+      `De ${total} estudiantes, ${gasto} faltaron. ¿Cuántos asistieron?`,
+      `Compré ${total} y ya usé ${gasto}. ¿Cuántos me faltan por usar?`,
+    ];
+    const q=templates[rnd(0,templates.length-1)];
+    return{type:'text',q,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(1,ans-8),ans+8).map(String)])};
+  });
+}
+
+// 14 · Figuras geométricas
+function qGeometry(){
+  const pool=[
+    {q:'¿Cuántos lados tiene un triángulo?',a:'3',o:['2','3','4','5']},
+    {q:'¿Cuántos lados tiene un cuadrado?',a:'4',o:['3','4','5','6']},
+    {q:'¿Cuántos lados tiene un rectángulo?',a:'4',o:['3','4','5','6']},
+    {q:'¿Cuántos lados tiene un círculo?',a:'0',o:['0','1','2','4']},
+    {q:'¿Cuántos lados tiene un pentágono?',a:'5',o:['4','5','6','7']},
+    {q:'¿Qué figura tiene todos sus lados iguales y 4 lados?',a:'cuadrado',o:['cuadrado','rectángulo','triángulo','círculo']},
+    {q:'¿Qué figura no tiene esquinas?',a:'círculo',o:['círculo','cuadrado','triángulo','rectángulo']},
+    {q:'La puerta de tu casa tiene forma de…',a:'rectángulo',o:['círculo','triángulo','rectángulo','cuadrado']},
+    {q:'La rueda de una bicicleta tiene forma de…',a:'círculo',o:['círculo','cuadrado','triángulo','rectángulo']},
+    {q:'¿Cuántos vértices tiene un triángulo?',a:'3',o:['2','3','4','5']},
+    {q:'Un cuadrado tiene 4 lados. ¿Cuántos lados tienen 2 cuadrados?',a:'8',o:['4','6','8','10']},
+    {q:'¿Qué figura tiene 2 lados largos y 2 lados cortos?',a:'rectángulo',o:['círculo','cuadrado','triángulo','rectángulo']},
+    {q:'¿Cuántas esquinas tiene un cuadrado?',a:'4',o:['3','4','5','6']},
+    {q:'Una pizza entera tiene forma de…',a:'círculo',o:['círculo','cuadrado','triángulo','rectángulo']},
+    {q:'¿Qué figura tiene 3 lados y 3 vértices?',a:'triángulo',o:['cuadrado','triángulo','círculo','rectángulo']},
+  ];
+  return Array.from({length:20},(_,i)=>{
+    const it=pool[i%pool.length];
+    return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};
+  });
+}
+
+// 15 · Secuencias y patrones
+function qPatterns(){
+  return Array.from({length:20},()=>{
+    const type=rnd(0,2);
+    if(type===0){
+      // Numeric sequence
+      const start=rnd(1,10),step=rnd(1,5);
+      const seq=[start,start+step,start+step*2,start+step*3];
+      const ans=start+step*4;
+      return{type:'text',q:`¿Qué número sigue? ${seq.join(', ')}, ___`,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(1,ans-8),ans+8).map(String)])};
+    }else if(type===1){
+      // Count by 2s or 5s or 10s
+      const base=[2,5,10][rnd(0,2)];
+      const start=rnd(1,5)*base;
+      const seq=[start,start+base,start+base*2,start+base*3];
+      const ans=start+base*4;
+      return{type:'text',q:`Cuenta de ${base} en ${base}: ${seq.join(', ')}, ___`,answer:String(ans),opts:sh([String(ans),...wrongSet(ans,3,Math.max(base,ans-base*2),ans+base*2).map(String)])};
+    }else{
+      // Classification / rule detection
+      const rules=[
+        {q:'¿Qué número falta? 2, 4, ___, 8, 10',a:'6',o:['5','6','7','8']},
+        {q:'¿Qué número falta? 5, 10, 15, ___, 25',a:'20',o:['18','19','20','21']},
+        {q:'¿Qué número falta? 10, 20, ___, 40, 50',a:'30',o:['25','30','35','45']},
+        {q:'¿Qué número falta? 1, 3, 5, ___, 9',a:'7',o:['6','7','8','10']},
+        {q:'¿Qué número falta? 100, 90, 80, ___, 60',a:'70',o:['65','70','75','85']},
+        {q:'Regla: +3. Sigue la serie: 3, 6, 9, ___',a:'12',o:['10','11','12','13']},
+        {q:'¿Cuál es la regla? 4, 8, 12, 16…',a:'sumar 4',o:['sumar 2','sumar 3','sumar 4','sumar 5']},
+      ];
+      const it=rules[rnd(0,rules.length-1)];
+      return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};
+    }
+  });
+}
+
+// ── READ GENERATORS (unchanged) ───────────────────────────────
+const VOW_POOL=[{w:'árbol',a:'a'},{w:'iglesia',a:'i'},{w:'oso',a:'o'},{w:'uva',a:'u'},{w:'elefante',a:'e'},{w:'isla',a:'i'},{w:'ángel',a:'a'},{w:'oreja',a:'o'},{w:'uniforme',a:'u'},{w:'escuela',a:'e'},{w:'avión',a:'a'},{w:'oveja',a:'o'},{w:'imán',a:'i'},{w:'útil',a:'u'},{w:'era',a:'e'}];
+function qVowels(){return Array.from({length:20},(_,i)=>{const it=VOW_POOL[i%VOW_POOL.length],wr=sh(['a','e','i','o','u'].filter(x=>x!==it.a)).slice(0,3);return{type:'text',q:`¿Con qué vocal empieza "${it.w}"?`,answer:it.a,opts:sh([it.a,...wr])};});}
+
+const SYL_POOL=[{q:'"mamá"',a:'2'},{q:'"mariposa"',a:'4'},{q:'"sol"',a:'1'},{q:'"elefante"',a:'4'},{q:'"mesa"',a:'2'},{q:'"ventana"',a:'3'},{q:'"pan"',a:'1'},{q:'"paraguas"',a:'3'},{q:'"computadora"',a:'5'},{q:'"libro"',a:'2'},{q:'"pelota"',a:'3'},{q:'"casa"',a:'2'},{q:'"chocolate"',a:'4'},{q:'"tren"',a:'1'},{q:'"murciélago"',a:'5'}];
+function qSyllables(){return Array.from({length:20},(_,i)=>{const it=SYL_POOL[i%SYL_POOL.length];const others=sh(['1','2','3','4','5','6'].filter(x=>x!==it.a)).slice(0,3);return{type:'text',q:`¿Cuántas sílabas tiene ${it.q}?`,answer:it.a,opts:sh([it.a,...others])};});}
+
+const WORD_POOL=[{p:'🐱',w:'gato',o:['gato','pato','rato','dato']},{p:'🌸',w:'flor',o:['flor','piel','biol','flan']},{p:'🌙',w:'luna',o:['luna','lana','lona','cuna']},{p:'🦁',w:'león',o:['lión','bión','león','sión']},{p:'🏠',w:'casa',o:['masa','pasa','casa','tasa']},{p:'🐦',w:'pájaro',o:['pájaro','páramo','pájalo','péjaro']},{p:'🌳',w:'árbol',o:['árbol','álbol','árbor','árpol']},{p:'⭐',w:'estrella',o:['estrilla','estrella','estralla','estrela']},{p:'🍦',w:'helado',o:['helado','heledo','hilado','heladoz']},{p:'🐟',w:'pez',o:['vez','mes','pez','pes']}];
+function qWords(){return Array.from({length:20},(_,i)=>{const it=WORD_POOL[i%WORD_POOL.length];return{type:'text',q:`¿Qué palabra corresponde a ${it.p}?`,answer:it.w,opts:sh(it.o)};});}
+
+const COMPL_POOL=[{s:'El gato duerme en la ___.',a:'cama',o:['cama','lago','nube','tren']},{s:'La niña come una ___ roja.',a:'manzana',o:['manzana','silla','nube','rueda']},{s:'El sol brilla en el ___.',a:'cielo',o:['cielo','suelo','bolso','marco']},{s:'Los peces viven en el ___.',a:'agua',o:['agua','suelo','cielo','fuego']},{s:'Por la noche brilla la ___.',a:'luna',o:['luna','tierra','flor','mesa']},{s:'Cuando llueve usamos ___.',a:'paraguas',o:['paraguas','sombrero','guantes','bufanda']},{s:'Las flores crecen en el ___.',a:'jardín',o:['jardín','techo','libro','cajón']},{s:'El avión vuela por el ___.',a:'cielo',o:['cielo','mar','pasto','túnel']},{s:'Los niños van a la ___ a aprender.',a:'escuela',o:['escuela','tienda','piscina','montaña']},{s:'El perro mueve la ___.',a:'cola',o:['cola','cabeza','pata','oreja']}];
+function qComplete(){return Array.from({length:20},(_,i)=>{const it=COMPL_POOL[i%COMPL_POOL.length];return{type:'text',q:'Completa la frase:',hint:it.s,answer:it.a,opts:sh(it.o)};});}
+
+const COMT_POOL=[{s:'Ana tiene 3 gatos. Uno negro, uno blanco y uno naranja.',q:'¿Cuántos gatos tiene Ana?',a:'3',o:['2','3','4','5']},{s:'El pájaro vuela sobre las nubes azules.',q:'¿Dónde vuela el pájaro?',a:'sobre las nubes',o:['en el agua','sobre las nubes','bajo la tierra','en la casa']},{s:'María tiene 5 años. Su hermano tiene 7.',q:'¿Quién es mayor?',a:'el hermano',o:['María','el hermano','los dos','ninguno']},{s:'Carlos corrió más rápido que Pedro pero más lento que Lucía.',q:'¿Quién llegó primero?',a:'Lucía',o:['Carlos','Pedro','Lucía','todos igual']},{s:'El cielo está gris y cae agua.',q:'¿Qué tiempo hace?',a:'llueve',o:['hace sol','llueve','nieva','hay viento']},{s:'Hay 10 niños en clase. 4 son niñas.',q:'¿Cuántos niños hay?',a:'6',o:['4','5','6','7']},{s:'La vaca da leche. Con la leche hacemos queso.',q:'¿Qué animal da leche?',a:'la vaca',o:['la vaca','el perro','el gato','el cerdo']},{s:'El tren sale a las 9 y llega a las 11.',q:'¿Cuánto dura el viaje?',a:'2 horas',o:['1 hora','2 horas','3 horas','4 horas']},{s:'Pedro tiene 2 hermanas y 1 hermano.',q:'¿Cuántos hermanos en total?',a:'3',o:['2','3','4','5']},{s:'Los lunes y miércoles hay música.',q:'¿Cuántos días de música?',a:'2',o:['1','2','3','4']}];
+function qComp(){return Array.from({length:20},(_,i)=>{const it=COMT_POOL[i%COMT_POOL.length];return{type:'text',q:it.q,hint:it.s,answer:it.a,opts:sh(it.o)};});}
+
+const SYN_POOL=[{q:'Sinónimo de "feliz"',a:'contento',o:['contento','triste','cansado','aburrido']},{q:'Sinónimo de "bonito"',a:'hermoso',o:['hermoso','feo','raro','oscuro']},{q:'Sinónimo de "correr"',a:'trotar',o:['trotar','dormir','comer','leer']},{q:'Sinónimo de "grande"',a:'enorme',o:['enorme','pequeño','delgado','corto']},{q:'Sinónimo de "rápido"',a:'veloz',o:['veloz','lento','quieto','suave']},{q:'Sinónimo de "casa"',a:'hogar',o:['hogar','calle','plaza','lago']},{q:'Sinónimo de "miedo"',a:'susto',o:['susto','alegría','amor','paz']},{q:'Sinónimo de "hablar"',a:'decir',o:['decir','callar','dormir','cantar']},{q:'Sinónimo de "niño"',a:'chico',o:['chico','viejo','adulto','señor']},{q:'Sinónimo de "frío"',a:'helado',o:['helado','cálido','tibio','ardiente']}];
+function qSynonyms(){return Array.from({length:20},(_,i)=>{const it=SYN_POOL[i%SYN_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};});}
+
+const ANT_POOL=[{q:'Antónimo de "arriba"',a:'abajo',o:['abajo','lado','dentro','lejos']},{q:'Antónimo de "día"',a:'noche',o:['noche','tarde','mañana','siesta']},{q:'Antónimo de "caliente"',a:'frío',o:['frío','tibio','cálido','templado']},{q:'Antónimo de "grande"',a:'pequeño',o:['pequeño','gordo','alto','largo']},{q:'Antónimo de "rápido"',a:'lento',o:['lento','suave','tranquilo','quieto']},{q:'Antónimo de "abierto"',a:'cerrado',o:['cerrado','lleno','vacío','roto']},{q:'Antónimo de "entrar"',a:'salir',o:['salir','pasar','venir','subir']},{q:'Antónimo de "blanco"',a:'negro',o:['negro','gris','rojo','azul']},{q:'Antónimo de "alegre"',a:'triste',o:['triste','cansado','hambriento','solitario']},{q:'Antónimo de "encender"',a:'apagar',o:['apagar','romper','soltar','tirar']}];
+function qAntonyms(){return Array.from({length:20},(_,i)=>{const it=ANT_POOL[i%ANT_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};});}
+
+const SYLID_POOL=[{q:'Sílaba inicial de "pelota"',a:'pe',o:['pe','po','pi','pa']},{q:'Sílaba inicial de "mariposa"',a:'ma',o:['ma','mi','mo','me']},{q:'Sílaba inicial de "camino"',a:'ca',o:['ca','co','cu','ce']},{q:'¿"bra" está en cuál palabra?',a:'cabra',o:['cabra','cama','carta','capa']},{q:'¿"llo" está en cuál palabra?',a:'pollo',o:['pollo','polo','poco','poro']},{q:'¿"tre" está en cuál palabra?',a:'tres',o:['tres','tez','tej','tem']},{q:'Sílaba inicial de "escuela"',a:'es',o:['es','cu','ela','el']},{q:'¿"llo" está en cuál palabra?',a:'silla',o:['silla','sala','solo','sola']},{q:'¿"gua" está en cuál palabra?',a:'agua',o:['agua','ala','ara','ama']},{q:'Sílaba inicial de "uniforme"',a:'u',o:['u','ni','for','me']}];
+function qSylId(){return Array.from({length:20},(_,i)=>{const it=SYLID_POOL[i%SYLID_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};});}
+
+const READQ_POOL=[{s:'El perro de Lucía se llama Toby. Le gusta correr en el parque.',q:'¿Cómo se llama el perro?',a:'Toby',o:['Toby','Rocky','Max','Bruno']},{s:'En verano hace calor. Los niños van a la playa.',q:'¿Adónde van los niños?',a:'a la playa',o:['a la playa','a la montaña','a la escuela','al mercado']},{s:'Pedro tiene 2 hermanas y 1 hermano.',q:'¿Cuántos hermanos en total?',a:'3',o:['2','3','4','5']},{s:'Los lunes y miércoles hay música.',q:'¿Cuántos días de música?',a:'2',o:['1','2','3','4']},{s:'La señora García vende frutas y verduras.',q:'¿Qué vende?',a:'frutas y verduras',o:['frutas y verduras','ropa','juguetes','libros']},{s:'Sofía tiene 8 años. Su prima tiene 6.',q:'¿Quién es mayor?',a:'Sofía',o:['Sofía','la prima','las dos','ninguna']},{s:'La tortuga camina lento. El conejo corre rápido.',q:'¿Quién es más rápido?',a:'el conejo',o:['el conejo','la tortuga','los dos igual','ninguno']},{s:'El gato duerme 14 horas al día.',q:'¿Cuántas horas duerme?',a:'14',o:['8','10','14','16']}];
+function qReadQ(){return Array.from({length:20},(_,i)=>{const it=READQ_POOL[i%READQ_POOL.length];return{type:'text',q:it.q,hint:it.s,answer:it.a,opts:sh(it.o)};});}
+
+const VOC_POOL=[{q:'¿Qué es un "diccionario"?',a:'libro de palabras',o:['libro de palabras','tipo de fruta','instrumento musical','animal marino']},{q:'¿Qué significa "anochecer"?',a:'cuando llega la noche',o:['cuando llega la noche','cuando sale el sol','hora de comer','momento de jugar']},{q:'¿Qué es un "herbívoro"?',a:'animal que come plantas',o:['animal que come plantas','animal que vuela','planta carnívora','tipo de hierba']},{q:'¿Qué significa "escaso"?',a:'que hay poco',o:['que hay poco','que hay mucho','que es grande','que es rápido']},{q:'¿Qué es una "enciclopedia"?',a:'libro con mucha información',o:['libro con mucha información','canción antigua','tipo de número','herramienta de jardín']},{q:'¿Qué significa "veloz"?',a:'muy rápido',o:['muy rápido','muy lento','muy grande','muy suave']},{q:'¿Qué es un "sinónimo"?',a:'palabra con igual significado',o:['palabra con igual significado','palabra opuesta','letra del alfabeto','número grande']},{q:'¿Qué significa "enorme"?',a:'muy grande',o:['muy grande','muy pequeño','muy lejos','muy cerca']}];
+function qVocab(){return Array.from({length:20},(_,i)=>{const it=VOC_POOL[i%VOC_POOL.length];return{type:'text',q:it.q,answer:it.a,opts:sh(it.o)};});}
+
+// ── GAME STATE ────────────────────────────────────────────────
+let GS={};
+let _timer=null;
+
+function startSession(subj){
+  const lvl=D.levels[subj]||0;
+  GS={subj,lvl,questions:genLevel(subj,lvl),qi:0,correct:0,errors:0,answered:false,t0:Date.now(),
+      totalAnswered:0,retryCount:0};
+  document.getElementById('g-subj').textContent=SL[subj];
+  document.getElementById('g-lvl').textContent=`Nivel ${lvl+1} — ${LN[subj][Math.min(lvl,LN[subj].length-1)]}`;
+  clearInterval(_timer);
+  _timer=setInterval(()=>{
+    const s=Math.floor((Date.now()-GS.t0)/1000);
+    document.getElementById('g-timer').textContent=`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+  },1000);
+  show('game');renderQ();
+}
+
+function renderQ(){
+  const q=GS.questions[GS.qi],total=GS.questions.length;
+  GS.answered=false;
+  const retryTag=q._retry?' <span style="color:var(--amber);font-size:10px;font-weight:700;background:var(--amber-l);padding:1px 6px;border-radius:4px;border:1px solid #E8C97A">REPASO</span>':'';
+  document.getElementById('q-num').innerHTML=`Pregunta ${GS.qi+1} de ${total}${retryTag}`;
+  document.getElementById('g-prog').style.width=Math.round(GS.qi/total*100)+'%';
+  document.getElementById('q-fb').style.display='none';
+  document.getElementById('next-btn').style.display='none';
+
+  let body='';
+  if(q.type==='count'){
+    body=`<div class="q-text">${q.q}</div><div class="q-count-area">${q.pic.join(' ')}</div>`;
+  }else if(q.type==='calc'){
+    body=`<div class="q-big">${q.q}</div>`;
+  }else{
+    body=`<div class="q-text">${q.q}</div>`;
+    if(q.hint)body+=`<div class="q-hint">${q.hint}</div>`;
+  }
+  document.getElementById('q-body').innerHTML=body;
+
+  const el=document.getElementById('q-opts');el.innerHTML='';
+  q.opts.forEach(o=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=String(o);
+    b.onclick=()=>checkAns(b,String(o),String(q.answer));
+    el.appendChild(b);
+  });
+}
+
+function checkAns(btn,chosen,correct){
+  if(GS.answered)return;GS.answered=true;
+  GS.totalAnswered++;
+  document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===correct)b.className='opt correct';});
+  const fb=document.getElementById('q-fb');
+  if(chosen===correct){
+    GS.correct++;btn.className='opt correct';
+    fb.innerHTML='<div class="feedback-row ok">✓ Correcto</div>';
+  }else{
+    GS.errors++;btn.className='opt wrong';
+    // Re-queue the failed question at the end with reshuffled options
+    const failedQ=GS.questions[GS.qi];
+    const requeuedQ=Object.assign({},failedQ,{opts:sh(failedQ.opts),_retry:true});
+    GS.questions.push(requeuedQ);
+    GS.retryCount++;
+    fb.innerHTML=`<div class="feedback-row fail">✗ Incorrecto — respuesta: <strong>${correct}</strong> · Volverá al final</div>`;
+  }
+  fb.style.display='block';
+  const nb=document.getElementById('next-btn');nb.style.display='block';
+  nb.textContent=GS.qi<GS.questions.length-1?'Siguiente':'Ver resultado';
+}
+
+function nextQ(){
+  if(GS.qi<GS.questions.length-1){GS.qi++;renderQ();}
+  else finishSession();
+}
+
+function confirmExit(){
+  if(confirm('¿Salir? El progreso de esta sesión no se guardará.')){clearInterval(_timer);goHome();}
+}
+
+// ── RESULTS ───────────────────────────────────────────────────
+let _rAction='home';
+
+function finishSession(){
+  clearInterval(_timer);
+  const timeMs=Date.now()-GS.t0;
+  // base total = original 20 questions (retries excluded from accuracy calc)
+  const total=GS.totalAnswered;
+  const correct=GS.correct,errors=GS.errors;
+  const acc=correct/total,errRate=errors/total;
+  const passed=acc>=PASS_ACC;
+  const avgSec=(timeMs/total/1000).toFixed(1);
+
+  D.history=D.history||[];
+  D.history.push({date:todayStr(),subject:GS.subj,level:GS.lvl,correct,total,timeMs,passed});
+
+  if(passed){
+    const maxLvl=LN[GS.subj].length-1;
+    if(GS.lvl<maxLvl)D.levels[GS.subj]=GS.lvl+1;
+    D.attempts[GS.subj]=0;
+    D.todayDone=true;D.lastDoneDate=todayStr();
+    _rAction='next';
+  }else{
+    D.attempts[GS.subj]=(D.attempts[GS.subj]||0)+1;
+    _rAction='repeat';
+  }
+  save();
+
+  const accPct=Math.round(acc*100);
+  document.getElementById('r-icon').textContent=passed?'✓':'✗';
+  document.getElementById('r-icon').style.color=passed?'var(--green)':'var(--red)';
+  document.getElementById('r-title').textContent=passed?'Nivel superado':'Repetir nivel';
+  document.getElementById('r-sub').textContent=`${accPct}% de precisión · ${fmtMs(timeMs)}`;
+  document.getElementById('r-cor').textContent=correct;
+  document.getElementById('r-err').textContent=errors;
+  document.getElementById('r-time').textContent=fmtMs(timeMs);
+  document.getElementById('r-spd').textContent=avgSec+'s';
+  document.getElementById('rs-cor').className=acc>=0.9?'res-stat good':acc>=0.8?'res-stat warn':'res-stat bad';
+  document.getElementById('rs-err').className=errRate===0?'res-stat good':errRate<=ERR_REPEAT?'res-stat warn':'res-stat bad';
+  document.getElementById('rs-spd').className=parseFloat(avgSec)<12?'res-stat good':'res-stat warn';
+
+  const vd=document.getElementById('r-verdict');
+  if(passed){
+    vd.className='verdict pass';
+    document.getElementById('rv-title').textContent='Dominio alcanzado — nivel superado';
+    const nxt=Math.min(GS.lvl+1,LN[GS.subj].length-1);
+    document.getElementById('rv-sub').textContent=`Próximo: Nivel ${nxt+1} — ${LN[GS.subj][nxt]}`;
+  }else{
+    vd.className='verdict repeat';
+    document.getElementById('rv-title').textContent=errRate>ERR_REPEAT?`${Math.round(errRate*100)}% de errores — nivel bloqueado`:`Precisión ${accPct}% — se requiere ${Math.round(PASS_ACC*100)}%`;
+    document.getElementById('rv-sub').textContent=`Intento ${D.attempts[GS.subj]} · Se requiere 80% para avanzar`;
+  }
+
+  const ab=document.getElementById('r-act-btn');
+  if(passed){ab.textContent='Siguiente nivel →';ab.className='btn success';}
+  else{ab.textContent='Repetir nivel ↺';ab.className='btn danger';}
+  show('results');
+}
+
+function doResultAction(){startSession(GS.subj);}
+
+(function(){
+  if(!D.name){show('setup');return;}
+  checkNewDay();goHome();
+})();
+</script>
+</body>
+</html>
